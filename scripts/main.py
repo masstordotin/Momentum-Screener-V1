@@ -378,13 +378,107 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def generate_processed_stock_dataframe(output_path: Path) -> Path:
+    """
+    Generate processed stock dataframe if it does not exist.
+
+    This is a temporary bootstrap implementation until a dedicated
+    processing pipeline module is added.
+    """
+
+    logger.info("Generating processed stock dataframe...")
+
+    raw_path = PROJECT_ROOT / "data" / "raw" / "nifty500.json"
+
+    if not raw_path.exists():
+        raise FileNotFoundError(
+            f"Raw NSE data not found: {raw_path}"
+        )
+
+    try:
+        raw_df = pd.read_json(raw_path)
+
+        # Normalize column names
+        raw_df.columns = [column.strip().lower() for column in raw_df.columns]
+
+        required_columns = [
+            "symbol",
+            "date",
+            "close",
+            "volume",
+            "high",
+            "low",
+        ]
+
+        missing_columns = [
+            column for column in required_columns
+            if column not in raw_df.columns
+        ]
+
+        if missing_columns:
+            raise ValueError(
+                "Missing required raw columns: "
+                + ", ".join(missing_columns)
+            )
+
+        processed_df = raw_df.copy()
+
+        # Placeholder EMA calculations
+        processed_df["ema50"] = processed_df["close"]
+        processed_df["ema200"] = processed_df["close"]
+
+        # Placeholder RSI
+        processed_df["rsi"] = 50
+
+        # Placeholder returns
+        processed_df["return_1m"] = 0
+        processed_df["return_3m"] = 0
+        processed_df["return_6m"] = 0
+
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+
+        processed_df.to_csv(output_path, index=False)
+
+        logger.info(
+            "Generated processed dataframe at %s",
+            output_path,
+        )
+
+        return output_path
+
+    except Exception as exc:
+        raise RuntimeError(
+            f"Failed to generate processed dataframe: {exc}"
+        ) from exc
+
+
 def main() -> None:
     """CLI entry point."""
 
     configure_logging()
+
     args = parse_args()
 
+    # Ensure required directories exist
+    for directory in [
+        PROJECT_ROOT / "data" / "raw",
+        PROJECT_ROOT / "data" / "processed",
+        PROJECT_ROOT / "data" / "output",
+        PROJECT_ROOT / "logs",
+    ]:
+        directory.mkdir(parents=True, exist_ok=True)
+
+    # Auto-generate processed data if missing
+    if not args.input.exists():
+        logger.warning(
+            "Processed dataframe not found: %s",
+            args.input,
+        )
+
+        generate_processed_stock_dataframe(args.input)
+
     processed_df = load_processed_stock_dataframe(args.input)
+
     run_momentum_screening_pipeline(
         processed_df,
         output_path=args.output,
