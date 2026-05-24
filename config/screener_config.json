@@ -1,0 +1,25 @@
+{
+  "rsi_momentum_filter": {
+    "active_mode": "moderate",
+    "lookback_days": 3,
+    "allowed_drop": 1,
+    "modes": {
+      "conservative": {
+        "min": 55,
+        "max": 70
+      },
+      "moderate": {
+        "min": 50,
+        "max": 75
+      },
+      "aggressive": {
+        "min": 45,
+        "max": 80
+      }
+    }
+  },
+  "volume_expansion_filter": {
+    "multiplier": 1.5,
+    "average_days": 30
+  }
+}

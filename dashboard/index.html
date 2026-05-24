@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Momentum Screener Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-zinc-100 text-zinc-950">
+  <main class="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-4 sm:px-6 lg:px-8">
+    <header class="border-b border-zinc-300 pb-4">
+      <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wide text-emerald-700">NSE Momentum Screener</p>
+          <h1 class="mt-1 text-2xl font-semibold tracking-normal text-zinc-950 sm:text-3xl">Ranked Momentum Results</h1>
+        </div>
+        <div class="grid grid-cols-3 gap-2 text-right">
+          <div class="border-l border-zinc-300 pl-3">
+            <p class="text-xs text-zinc-500">Universe</p>
+            <p id="metricUniverse" class="text-lg font-semibold">0</p>
+          </div>
+          <div class="border-l border-zinc-300 pl-3">
+            <p class="text-xs text-zinc-500">Average Score</p>
+            <p id="metricAverageScore" class="text-lg font-semibold">0.00</p>
+          </div>
+          <div class="border-l border-zinc-300 pl-3">
+            <p class="text-xs text-zinc-500">Top Percentile</p>
+            <p id="metricTopPercentile" class="text-lg font-semibold">0.00</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="mt-4 flex flex-col gap-3 border-b border-zinc-300 pb-4 md:flex-row md:items-center md:justify-between">
+      <label class="w-full md:max-w-sm">
+        <span class="sr-only">Search symbol</span>
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="Search symbol"
+          class="h-10 w-full border border-zinc-300 bg-white px-3 text-sm outline-none transition focus:border-emerald-700"
+        />
+      </label>
+      <div class="flex items-center gap-2 text-sm text-zinc-600">
+        <span id="statusText">Loading results</span>
+        <button
+          id="reloadButton"
+          type="button"
+          class="h-10 border border-zinc-300 bg-white px-3 font-medium text-zinc-800 transition hover:border-zinc-500 hover:bg-zinc-50"
+        >
+          Reload
+        </button>
+      </div>
+    </section>
+
+    <section class="mt-4 flex-1 overflow-hidden border border-zinc-300 bg-white">
+      <div class="overflow-x-auto">
+        <table class="min-w-full border-collapse text-left text-sm">
+          <thead class="bg-zinc-900 text-xs uppercase tracking-wide text-zinc-100">
+            <tr>
+              <th class="whitespace-nowrap px-3 py-3">
+                <button class="sort-button flex items-center gap-1 font-semibold" data-sort-key="rank">Rank <span data-sort-icon="rank"></span></button>
+              </th>
+              <th class="whitespace-nowrap px-3 py-3">
+                <button class="sort-button flex items-center gap-1 font-semibold" data-sort-key="symbol">Symbol <span data-sort-icon="symbol"></span></button>
+              </th>
+              <th class="whitespace-nowrap px-3 py-3 text-right">
+                <button class="sort-button ml-auto flex items-center gap-1 font-semibold" data-sort-key="rsi">RSI <span data-sort-icon="rsi"></span></button>
+              </th>
+              <th class="whitespace-nowrap px-3 py-3 text-right">
+                <button class="sort-button ml-auto flex items-center gap-1 font-semibold" data-sort-key="ema50">EMA50 <span data-sort-icon="ema50"></span></button>
+              </th>
+              <th class="whitespace-nowrap px-3 py-3 text-right">
+                <button class="sort-button ml-auto flex items-center gap-1 font-semibold" data-sort-key="ema200">EMA200 <span data-sort-icon="ema200"></span></button>
+              </th>
+              <th class="whitespace-nowrap px-3 py-3 text-right">
+                <button class="sort-button ml-auto flex items-center gap-1 font-semibold" data-sort-key="momentumScore">Momentum Score <span data-sort-icon="momentumScore"></span></button>
+              </th>
+              <th class="whitespace-nowrap px-3 py-3 text-right">
+                <button class="sort-button ml-auto flex items-center gap-1 font-semibold" data-sort-key="momentumPercentile">Momentum Percentile <span data-sort-icon="momentumPercentile"></span></button>
+              </th>
+              <th class="whitespace-nowrap px-3 py-3 text-right">
+                <button class="sort-button ml-auto flex items-center gap-1 font-semibold" data-sort-key="volumeExpansion">Volume Expansion <span data-sort-icon="volumeExpansion"></span></button>
+              </th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody" class="divide-y divide-zinc-200"></tbody>
+        </table>
+      </div>
+      <div id="emptyState" class="hidden px-4 py-12 text-center">
+        <p class="text-base font-semibold text-zinc-900">No ranked stocks available</p>
+        <p class="mt-1 text-sm text-zinc-500">Run the screening pipeline to generate data/output/final_results.json.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const RESULTS_URL = "../data/output/final_results.json";
+
+    const state = {
+      rows: [],
+      filteredRows: [],
+      sortKey: "rank",
+      sortDirection: "asc"
+    };
+
+    const numberFields = new Set([
+      "rank",
+      "rsi",
+      "ema50",
+      "ema200",
+      "momentumScore",
+      "momentumPercentile",
+      "volumeExpansion"
+    ]);
+
+    const elements = {
+      body: document.getElementById("resultsBody"),
+      emptyState: document.getElementById("emptyState"),
+      statusText: document.getElementById("statusText"),
+      searchInput: document.getElementById("searchInput"),
+      reloadButton: document.getElementById("reloadButton"),
+      metricUniverse: document.getElementById("metricUniverse"),
+      metricAverageScore: document.getElementById("metricAverageScore"),
+      metricTopPercentile: document.getElementById("metricTopPercentile")
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      loadResults();
+      elements.searchInput.addEventListener("input", handleSearch);
+      elements.reloadButton.addEventListener("click", loadResults);
+
+      document.querySelectorAll(".sort-button").forEach((button) => {
+        button.addEventListener("click", () => {
+          updateSort(button.dataset.sortKey);
+        });
+      });
+    });
+
+    async function loadResults() {
+      elements.statusText.textContent = "Loading results";
+
+      try {
+        const response = await fetch(`${RESULTS_URL}?cache=${Date.now()}`);
+
+        if (!response.ok) {
+          throw new Error(`Unable to load ${RESULTS_URL}`);
+        }
+
+        const payload = await response.json();
+        const records = Array.isArray(payload.results) ? payload.results : [];
+
+        state.rows = records.map(normalizeRow);
+        state.filteredRows = [...state.rows];
+        elements.searchInput.value = "";
+
+        sortRows();
+        updateMetrics();
+        renderTable();
+        elements.statusText.textContent = `Loaded ${state.rows.length} results`;
+      } catch (error) {
+        console.error(error);
+        state.rows = [];
+        state.filteredRows = [];
+        updateMetrics();
+        renderTable();
+        elements.statusText.textContent = "Results file not found";
+      }
+    }
+
+    function normalizeRow(row, index) {
+      const averageVolume = firstNumber(row.avg_volume_30, row.average_volume_30, row.avgVolume30);
+      const currentVolume = firstNumber(row.volume, row.today_volume, row.current_volume);
+
+      return {
+        rank: firstNumber(row.rank, index + 1),
+        symbol: String(row.symbol ?? row.SYMBOL ?? "-").toUpperCase(),
+        rsi: firstNumber(row.rsi, row.RSI),
+        ema50: firstNumber(row.ema50, row.EMA50),
+        ema200: firstNumber(row.ema200, row.EMA200),
+        momentumScore: firstNumber(row.momentum_score, row.momentumScore),
+        momentumPercentile: firstNumber(row.momentum_percentile, row.momentumPercentile),
+        volumeExpansion: firstNumber(
+          row.volume_expansion,
+          row.volume_expansion_ratio,
+          row.volumeExpansion,
+          currentVolume !== null && averageVolume ? currentVolume / averageVolume : null
+        )
+      };
+    }
+
+    function firstNumber(...values) {
+      for (const value of values) {
+        if (value === null || value === undefined || value === "") {
+          continue;
+        }
+
+        const numericValue = Number(value);
+        if (Number.isFinite(numericValue)) {
+          return numericValue;
+        }
+      }
+
+      return null;
+    }
+
+    function handleSearch() {
+      const query = elements.searchInput.value.trim().toUpperCase();
+
+      state.filteredRows = query
+        ? state.rows.filter((row) => row.symbol.includes(query))
+        : [...state.rows];
+
+      sortRows();
+      renderTable();
+      elements.statusText.textContent = `Showing ${state.filteredRows.length} of ${state.rows.length}`;
+    }
+
+    function updateSort(sortKey) {
+      if (state.sortKey === sortKey) {
+        state.sortDirection = state.sortDirection === "asc" ? "desc" : "asc";
+      } else {
+        state.sortKey = sortKey;
+        state.sortDirection = numberFields.has(sortKey) ? "desc" : "asc";
+      }
+
+      sortRows();
+      renderTable();
+    }
+
+    function sortRows() {
+      const direction = state.sortDirection === "asc" ? 1 : -1;
+
+      state.filteredRows.sort((left, right) => {
+        const leftValue = left[state.sortKey];
+        const rightValue = right[state.sortKey];
+
+        if (numberFields.has(state.sortKey)) {
+          return compareNumbers(leftValue, rightValue) * direction;
+        }
+
+        return String(leftValue).localeCompare(String(rightValue)) * direction;
+      });
+    }
+
+    function compareNumbers(leftValue, rightValue) {
+      if (leftValue === null && rightValue === null) return 0;
+      if (leftValue === null) return 1;
+      if (rightValue === null) return -1;
+      return leftValue - rightValue;
+    }
+
+    function renderTable() {
+      elements.body.innerHTML = "";
+      updateSortIcons();
+
+      if (state.filteredRows.length === 0) {
+        elements.emptyState.classList.remove("hidden");
+        return;
+      }
+
+      elements.emptyState.classList.add("hidden");
+
+      const rowsMarkup = state.filteredRows.map((row) => `
+        <tr class="transition hover:bg-zinc-50">
+          <td class="whitespace-nowrap px-3 py-3 font-medium text-zinc-700">${formatInteger(row.rank)}</td>
+          <td class="whitespace-nowrap px-3 py-3 font-semibold text-zinc-950">${row.symbol}</td>
+          <td class="whitespace-nowrap px-3 py-3 text-right">${formatNumber(row.rsi)}</td>
+          <td class="whitespace-nowrap px-3 py-3 text-right">${formatNumber(row.ema50)}</td>
+          <td class="whitespace-nowrap px-3 py-3 text-right">${formatNumber(row.ema200)}</td>
+          <td class="whitespace-nowrap px-3 py-3 text-right font-semibold text-emerald-700">${formatNumber(row.momentumScore)}</td>
+          <td class="whitespace-nowrap px-3 py-3 text-right">${formatNumber(row.momentumPercentile)}</td>
+          <td class="whitespace-nowrap px-3 py-3 text-right">${formatMultiple(row.volumeExpansion)}</td>
+        </tr>
+      `).join("");
+
+      elements.body.innerHTML = rowsMarkup;
+    }
+
+    function updateMetrics() {
+      const scores = state.rows
+        .map((row) => row.momentumScore)
+        .filter((value) => value !== null);
+      const percentiles = state.rows
+        .map((row) => row.momentumPercentile)
+        .filter((value) => value !== null);
+
+      elements.metricUniverse.textContent = String(state.rows.length);
+      elements.metricAverageScore.textContent = formatNumber(average(scores));
+      elements.metricTopPercentile.textContent = formatNumber(Math.max(0, ...percentiles));
+    }
+
+    function updateSortIcons() {
+      document.querySelectorAll("[data-sort-icon]").forEach((icon) => {
+        const key = icon.dataset.sortIcon;
+        icon.textContent = key === state.sortKey
+          ? (state.sortDirection === "asc" ? "↑" : "↓")
+          : "";
+      });
+    }
+
+    function average(values) {
+      if (values.length === 0) {
+        return null;
+      }
+
+      return values.reduce((sum, value) => sum + value, 0) / values.length;
+    }
+
+    function formatNumber(value) {
+      return value === null ? "-" : value.toFixed(2);
+    }
+
+    function formatInteger(value) {
+      return value === null ? "-" : String(Math.trunc(value));
+    }
+
+    function formatMultiple(value) {
+      return value === null ? "-" : `${value.toFixed(2)}x`;
+    }
+  </script>
+</body>
+</html>

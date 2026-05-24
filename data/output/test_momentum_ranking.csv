@@ -1,0 +1,3 @@
+symbol,return_6m,return_3m,return_1m,momentum,momentum_score,momentum_percentile
+A,30,20,10,20.0,100.0,100.0
+B,10,8,4,7.2,0.0,50.0

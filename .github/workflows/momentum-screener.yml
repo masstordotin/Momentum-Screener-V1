@@ -1,0 +1,89 @@
+name: Momentum Screener
+
+# Give the workflow permission to push updated data files back to the repo.
+permissions:
+  contents: write
+
+on:
+  # Runs Monday-Friday at 11:30 UTC, which is 17:00 IST.
+  # This is safely after the regular NSE market close.
+  schedule:
+    - cron: "30 11 * * 1-5"
+
+  # Manual trigger for testing the workflow from the GitHub Actions tab.
+  workflow_dispatch:
+
+jobs:
+  run-momentum-screener:
+    name: Fetch NSE data and run screener
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # Required so the workflow can commit back to the same branch.
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Calculate NSE collection date
+        id: dates
+        shell: bash
+        run: |
+          # GitHub runners use UTC by default.
+          # TZ=Asia/Kolkata makes the date match the Indian trading day.
+          echo "trade_date=$(TZ=Asia/Kolkata date +'%d-%m-%Y')" >> "$GITHUB_OUTPUT"
+
+      - name: Fetch NSE raw data
+        run: |
+          # The bhavcopy source is the most reliable official NSE source for CI.
+          python scripts/collectors/nifty500_eod_collector.py \
+            --from-date "${{ steps.dates.outputs.trade_date }}" \
+            --to-date "${{ steps.dates.outputs.trade_date }}" \
+            --eod-source bhavcopy \
+            --pause-seconds 1.0
+
+      - name: Check processed data exists
+        run: |
+          # The master pipeline expects this processed dataframe.
+          # Keep this check explicit so a missing processing step is easy to debug.
+          test -f data/processed/processed_stocks.csv
+
+      - name: Run full screening pipeline
+        run: |
+          # This generates data/output/final_results.json.
+          python scripts/main.py \
+            --input data/processed/processed_stocks.csv \
+            --output data/output/final_results.json
+
+      - name: Verify final results were generated
+        run: |
+          # Fail loudly if the dashboard input was not produced.
+          test -f data/output/final_results.json
+
+      - name: Commit updated data files
+        run: |
+          # Configure the Git identity used by GitHub Actions.
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Add raw NSE data and final dashboard results.
+          git add data/raw data/output
+
+          # Only commit when files actually changed.
+          if git diff --cached --quiet; then
+            echo "No data changes to commit."
+          else
+            git commit -m "Update momentum screener results"
+            git push
+          fi
