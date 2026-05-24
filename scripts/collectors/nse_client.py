@@ -276,10 +276,14 @@ class NSEClient:
 
         last_error: NSEClientError | None = None
         for base_url in (self.ARCHIVE_BASE_URL, self.LEGACY_ARCHIVE_BASE_URL):
-            try:
-                return self._request(f"{base_url}{path}", headers=headers)
-            except NSEClientError as exc:
-                last_error = exc
+            response = self._request(f"{base_url}{path}", headers=headers)
+            if response.status_code < 400:
+                return response
+
+            last_error = NSEClientError(
+                f"NSE archive request failed with HTTP {response.status_code}: "
+                f"{response.text[:200]}"
+            )
 
         if last_error is not None:
             raise last_error

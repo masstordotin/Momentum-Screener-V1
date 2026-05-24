@@ -24,7 +24,7 @@ def detect_local_peaks(
     _validate_window(window)
     _validate_columns(stock_df, [high_column], "peak detection")
 
-    highs = stock_df[high_column]
+    highs = pd.to_numeric(stock_df[high_column], errors="coerce")
     peak_mask = pd.Series(True, index=stock_df.index)
 
     # Compare each high with the same number of candles on the left and right.
@@ -45,7 +45,7 @@ def detect_local_troughs(
     _validate_window(window)
     _validate_columns(stock_df, [low_column], "trough detection")
 
-    lows = stock_df[low_column]
+    lows = pd.to_numeric(stock_df[low_column], errors="coerce")
     trough_mask = pd.Series(True, index=stock_df.index)
 
     # A trough is a local low: lower than nearby candles on both sides.
@@ -81,6 +81,8 @@ def has_higher_high_higher_low_structure(
     working_df = stock_df.copy()
     if date_column is not None:
         working_df = working_df.sort_values(date_column)
+    working_df[high_column] = pd.to_numeric(working_df[high_column], errors="coerce")
+    working_df[low_column] = pd.to_numeric(working_df[low_column], errors="coerce")
 
     peaks = detect_local_peaks(working_df, high_column, window)
     troughs = detect_local_troughs(working_df, low_column, window)
@@ -91,8 +93,10 @@ def has_higher_high_higher_low_structure(
     recent_peaks = peaks.tail(required_swings)
     recent_troughs = troughs.tail(required_swings)
 
-    higher_highs = recent_peaks[high_column].is_monotonic_increasing
-    higher_lows = recent_troughs[low_column].is_monotonic_increasing
+    # HH-HL structure requires strictly rising swings. Equal highs/lows are
+    # not structural progress and should not pass as leadership.
+    higher_highs = (recent_peaks[high_column].diff().dropna() > 0).all()
+    higher_lows = (recent_troughs[low_column].diff().dropna() > 0).all()
 
     return bool(higher_highs and higher_lows)
 
@@ -174,4 +178,3 @@ def _validate_window(window: int) -> None:
 
     if window < 1:
         raise ValueError("window must be at least 1.")
-

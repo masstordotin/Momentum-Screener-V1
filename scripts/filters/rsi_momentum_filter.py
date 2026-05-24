@@ -46,10 +46,18 @@ def load_rsi_filter_config(
         )
         return DEFAULT_RSI_CONFIG.copy()
 
-    with config_path.open("r", encoding="utf-8") as file:
-        config = json.load(file)
+    try:
+        with config_path.open("r", encoding="utf-8") as file:
+            config = json.load(file)
+    except (json.JSONDecodeError, OSError) as exc:
+        logger.warning("Could not read RSI config. Using defaults: %s", exc)
+        return DEFAULT_RSI_CONFIG.copy()
 
     rsi_config = config.get("rsi_momentum_filter", DEFAULT_RSI_CONFIG)
+    if not isinstance(rsi_config, dict):
+        logger.warning("RSI config is malformed. Using default RSI settings.")
+        return DEFAULT_RSI_CONFIG.copy()
+
     return rsi_config
 
 
@@ -120,6 +128,7 @@ def filter_rsi_momentum_stocks(
         return stock_df.copy()
 
     working_df = stock_df.copy()
+    working_df[rsi_column] = pd.to_numeric(working_df[rsi_column], errors="coerce")
 
     # Sorting makes groupby().shift() compare each row with the same stock's RSI
     # from 3 rows earlier. With daily processed data, that means 3 trading days.
@@ -155,4 +164,3 @@ def filter_rsi_momentum_stocks(
     )
 
     return filtered_df.drop(columns=[previous_rsi_column])
-

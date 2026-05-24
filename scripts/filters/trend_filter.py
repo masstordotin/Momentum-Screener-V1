@@ -49,13 +49,17 @@ def filter_structurally_bullish_stocks(
         logger.info("Trend filter received an empty dataframe.")
         return stock_df.copy()
 
+    working_df = stock_df.copy()
+    for column in required_columns:
+        working_df[column] = pd.to_numeric(working_df[column], errors="coerce")
+
     # This boolean mask is True only for rows in a bullish long-term structure.
     bullish_mask = (
-        (stock_df[close_column] > stock_df[ema50_column])
-        & (stock_df[ema50_column] > stock_df[ema200_column])
+        (working_df[close_column] > working_df[ema50_column])
+        & (working_df[ema50_column] > working_df[ema200_column])
     )
 
-    filtered_df = stock_df.loc[bullish_mask].copy()
+    filtered_df = working_df.loc[bullish_mask].copy()
 
     logger.info(
         "Trend filter retained %s of %s rows.",
@@ -64,4 +68,3 @@ def filter_structurally_bullish_stocks(
     )
 
     return filtered_df
-

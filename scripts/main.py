@@ -39,16 +39,37 @@ except ImportError:
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_INPUT_PATH = PROJECT_ROOT / "data" / "processed" / "processed_stocks.csv"
 DEFAULT_OUTPUT_PATH = PROJECT_ROOT / "data" / "output" / "final_results.json"
+DEFAULT_LOG_PATH = PROJECT_ROOT / "logs" / "momentum_screener.log"
+
+REQUIRED_PIPELINE_COLUMNS = [
+    "symbol",
+    "date",
+    "close",
+    "ema50",
+    "ema200",
+    "rsi",
+    "volume",
+    "high",
+    "low",
+    "return_1m",
+    "return_3m",
+    "return_6m",
+]
 
 logger = logging.getLogger(__name__)
 
 
-def configure_logging() -> None:
+def configure_logging(log_path: Path = DEFAULT_LOG_PATH) -> None:
     """Configure readable console logging for the screening pipeline."""
 
+    log_path.parent.mkdir(parents=True, exist_ok=True)
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
+        handlers=[
+            logging.StreamHandler(),
+            logging.FileHandler(log_path, encoding="utf-8"),
+        ],
     )
 
 
@@ -61,17 +82,67 @@ def load_processed_stock_dataframe(input_path: Path) -> pd.DataFrame:
     suffix = input_path.suffix.lower()
 
     if suffix == ".csv":
-        return pd.read_csv(input_path)
+        stock_df = pd.read_csv(input_path)
+        return validate_processed_stock_dataframe(stock_df)
 
     if suffix == ".json":
-        return pd.read_json(input_path)
+        stock_df = pd.read_json(input_path)
+        return validate_processed_stock_dataframe(stock_df)
 
     if suffix == ".parquet":
-        return pd.read_parquet(input_path)
+        stock_df = pd.read_parquet(input_path)
+        return validate_processed_stock_dataframe(stock_df)
 
     raise ValueError(
         "Unsupported processed input format. Use .csv, .json, or .parquet."
     )
+
+
+def validate_processed_stock_dataframe(stock_df: pd.DataFrame) -> pd.DataFrame:
+    """Validate and normalize processed data before any screening logic runs."""
+
+    missing_columns = [
+        column for column in REQUIRED_PIPELINE_COLUMNS if column not in stock_df.columns
+    ]
+    if missing_columns:
+        raise ValueError(
+            "Processed dataframe missing required columns: "
+            + ", ".join(missing_columns)
+        )
+
+    if stock_df.empty:
+        raise ValueError("Processed dataframe is empty.")
+
+    clean_df = stock_df.copy()
+    clean_df["symbol"] = clean_df["symbol"].astype(str).str.strip().str.upper()
+    clean_df["date"] = pd.to_datetime(clean_df["date"], errors="coerce")
+
+    numeric_columns = [
+        "close",
+        "ema50",
+        "ema200",
+        "rsi",
+        "volume",
+        "high",
+        "low",
+        "return_1m",
+        "return_3m",
+        "return_6m",
+    ]
+    for column in numeric_columns:
+        clean_df[column] = pd.to_numeric(clean_df[column], errors="coerce")
+
+    clean_df = clean_df.dropna(subset=["symbol", "date", "close"])
+    clean_df = clean_df.loc[clean_df["symbol"] != ""]
+    clean_df = clean_df.loc[clean_df["close"] > 0]
+    clean_df = clean_df.loc[clean_df["high"] >= clean_df["low"]]
+    clean_df = clean_df.drop_duplicates(subset=["symbol", "date"], keep="last")
+
+    if clean_df.empty:
+        raise ValueError("Processed dataframe has no valid rows after validation.")
+
+    logger.info("Validated processed dataframe with %s rows.", len(clean_df))
+    return clean_df.sort_values(["symbol", "date"]).reset_index(drop=True)
 
 
 def save_final_results_json(
@@ -86,6 +157,7 @@ def save_final_results_json(
     records = ranked_df.to_dict(orient="records")
     payload = {
         "row_count": len(records),
+        "generated_by": "momentum_screening_pipeline",
         "results": records,
     }
 
@@ -104,6 +176,7 @@ def run_momentum_screening_pipeline(
     """Run all filters sequentially and return the final ranked dataframe."""
 
     try:
+        stock_df = validate_processed_stock_dataframe(stock_df)
         logger.info("Starting pipeline with %s rows.", len(stock_df))
 
         filtered_df = _run_symbol_filter_step(
@@ -156,6 +229,7 @@ def _run_symbol_filter_step(
     step_function: Callable[[pd.DataFrame], pd.DataFrame],
     stock_df: pd.DataFrame,
     symbol_column: str = "symbol",
+    date_column: str = "date",
 ) -> pd.DataFrame:
     """Run a filter, then keep full history for symbols that passed.
 
@@ -184,6 +258,12 @@ def _run_symbol_filter_step(
 
     passing_symbols = set(passing_df[symbol_column].dropna().unique())
     filtered_df = stock_df.loc[stock_df[symbol_column].isin(passing_symbols)].copy()
+    filtered_df = _merge_filter_annotations(
+        filtered_df,
+        passing_df,
+        symbol_column=symbol_column,
+        date_column=date_column,
+    )
 
     logger.info(
         "%s retained %s of %s symbols.",
@@ -192,6 +272,38 @@ def _run_symbol_filter_step(
         before_symbols,
     )
     return filtered_df
+
+
+def _merge_filter_annotations(
+    full_history_df: pd.DataFrame,
+    passing_df: pd.DataFrame,
+    symbol_column: str,
+    date_column: str,
+) -> pd.DataFrame:
+    """Carry useful computed filter columns onto the preserved history.
+
+    The pipeline keeps full history for later filters, but some filters compute
+    fields needed by the final output. This merge keeps those new fields on the
+    latest passing row without mutating older history.
+    """
+
+    if date_column not in full_history_df.columns or date_column not in passing_df.columns:
+        return full_history_df
+
+    annotation_columns = [
+        column
+        for column in passing_df.columns
+        if column not in full_history_df.columns
+    ]
+    if not annotation_columns:
+        return full_history_df
+
+    merge_columns = [symbol_column, date_column] + annotation_columns
+    return full_history_df.merge(
+        passing_df[merge_columns],
+        on=[symbol_column, date_column],
+        how="left",
+    )
 
 
 def _run_filter_step(

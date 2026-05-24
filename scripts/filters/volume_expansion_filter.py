@@ -38,10 +38,19 @@ def load_volume_filter_config(
         )
         return DEFAULT_VOLUME_CONFIG.copy()
 
-    with config_path.open("r", encoding="utf-8") as file:
-        config = json.load(file)
+    try:
+        with config_path.open("r", encoding="utf-8") as file:
+            config = json.load(file)
+    except (json.JSONDecodeError, OSError) as exc:
+        logger.warning("Could not read volume config. Using defaults: %s", exc)
+        return DEFAULT_VOLUME_CONFIG.copy()
 
-    return config.get("volume_expansion_filter", DEFAULT_VOLUME_CONFIG)
+    volume_config = config.get("volume_expansion_filter", DEFAULT_VOLUME_CONFIG)
+    if not isinstance(volume_config, dict):
+        logger.warning("Volume config is malformed. Using default settings.")
+        return DEFAULT_VOLUME_CONFIG.copy()
+
+    return volume_config
 
 
 def filter_volume_expansion_stocks(
@@ -95,6 +104,10 @@ def filter_volume_expansion_stocks(
         return stock_df.copy()
 
     working_df = stock_df.copy()
+    working_df[volume_column] = pd.to_numeric(
+        working_df[volume_column],
+        errors="coerce",
+    )
 
     # Sorting ensures the rolling average uses each stock's volume history in
     # chronological order.
@@ -110,16 +123,20 @@ def filter_volume_expansion_stocks(
             lambda volume_series: volume_series.rolling(
                 window=configured_average_days,
                 min_periods=configured_average_days,
-            ).mean()
+            ).mean().shift(1)
         )
     )
 
-    latest_rows = working_df.groupby(symbol_column, as_index=False).tail(1)
+    latest_rows = working_df.groupby(symbol_column, as_index=False).tail(1).copy()
 
-    # Stocks without enough history have NaN average volume and will not pass.
+    # Stocks without enough prior history have NaN average volume and will not
+    # pass. The current day's volume is not included in its own average.
     volume_expanded = (
         latest_rows[volume_column]
         > configured_multiplier * latest_rows[average_volume_column]
+    )
+    latest_rows["volume_expansion"] = (
+        latest_rows[volume_column] / latest_rows[average_volume_column]
     )
 
     filtered_df = latest_rows.loc[volume_expanded].copy()
@@ -131,5 +148,4 @@ def filter_volume_expansion_stocks(
         configured_multiplier,
     )
 
-    return filtered_df.drop(columns=[average_volume_column])
-
+    return filtered_df

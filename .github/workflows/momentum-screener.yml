@@ -53,11 +53,12 @@ jobs:
             --eod-source bhavcopy \
             --pause-seconds 1.0
 
-      - name: Check processed data exists
+      - name: Build processed indicator dataframe
         run: |
-          # The master pipeline expects this processed dataframe.
-          # Keep this check explicit so a missing processing step is easy to debug.
-          test -f data/processed/processed_stocks.csv
+          # Converts accumulated raw bhavcopy files into the indicator dataframe.
+          python scripts/indicators/indicator_engine.py \
+            --raw-dir data/raw/nifty500_eod \
+            --output data/processed/processed_stocks.csv
 
       - name: Run full screening pipeline
         run: |
@@ -78,7 +79,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           # Add raw NSE data and final dashboard results.
-          git add data/raw data/output
+          git add data/raw data/processed data/output
 
           # Only commit when files actually changed.
           if git diff --cached --quiet; then

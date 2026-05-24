@@ -147,6 +147,7 @@ def collect_nifty500_from_bhavcopy(
     to_date: str,
     run_dir: Path,
     pause_seconds: float,
+    fail_if_no_data: bool = True,
 ) -> None:
     """Collect daily NSE bhavcopy files and filter them to NIFTY 500."""
 
@@ -192,6 +193,12 @@ def collect_nifty500_from_bhavcopy(
         },
         run_dir / "bhavcopy_manifest.json",
     )
+
+    if saved_dates == 0 and fail_if_no_data:
+        raise NSEClientError(
+            "No bhavcopy files were downloaded. This can happen on NSE holidays "
+            "or when archives are not published yet."
+        )
 
 
 def collect_nifty500_eod(

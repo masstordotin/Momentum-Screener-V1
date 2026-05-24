@@ -1,0 +1,20 @@
+# Local Python environments
+.venv/
+venv/
+env/
+
+# Python runtime/cache files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Local logs
+logs/*.log
+
+# Local verification artifacts
+data/output/pipeline_smoke_test.json
+data/output/test_momentum_ranking.csv
+
+# OS/editor noise
+.DS_Store
+Thumbs.db

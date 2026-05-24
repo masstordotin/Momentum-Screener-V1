@@ -14,6 +14,7 @@ from __future__ import annotations
 import logging
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 
@@ -33,6 +34,8 @@ def calculate_momentum_persistence(
     _validate_columns(stock_df, required_columns)
 
     ranked_df = stock_df.copy()
+    for column in required_columns:
+        ranked_df[column] = pd.to_numeric(ranked_df[column], errors="coerce")
 
     # Weighted momentum rewards persistence across multiple timeframes.
     ranked_df[momentum_column] = (
@@ -51,7 +54,9 @@ def rank_momentum_persistence(
     return_1m_column: str = "return_1m",
     momentum_column: str = "momentum",
     normalized_score_column: str = "momentum_score",
+    zscore_column: str = "momentum_zscore",
     percentile_column: str = "momentum_percentile",
+    rank_column: str = "rank",
 ) -> pd.DataFrame:
     """Return a ranked dataframe after rejecting negative momentum rows."""
 
@@ -69,26 +74,36 @@ def rank_momentum_persistence(
 
     before_count = len(ranked_df)
 
-    # Negative momentum means the stock is not persistent enough for this model.
+    ranked_df = ranked_df.dropna(subset=[momentum_column])
+
+    # Negative or zero momentum means the stock is not persistent enough for
+    # this model. This keeps the final book focused on positive leadership.
     ranked_df = ranked_df.loc[ranked_df[momentum_column] > 0].copy()
 
     if ranked_df.empty:
         logger.info("Momentum ranking rejected all %s rows.", before_count)
         return ranked_df
 
-    ranked_df[normalized_score_column] = _normalize_to_100(
-        ranked_df[momentum_column]
-    )
+    ranked_df[zscore_column] = _zscore(ranked_df[momentum_column])
+    ranked_df[normalized_score_column] = _normalize_to_100(ranked_df[momentum_column])
 
     # Percentile rank shows where each stock stands versus the current universe.
     ranked_df[percentile_column] = (
-        ranked_df[momentum_column].rank(pct=True) * 100
+        ranked_df[momentum_column].rank(method="average", pct=True) * 100
     )
 
+    sort_columns = [momentum_column, percentile_column]
+    ascending = [False, False]
+    if "symbol" in ranked_df.columns:
+        sort_columns.append("symbol")
+        ascending.append(True)
+
     ranked_df = ranked_df.sort_values(
-        [momentum_column, percentile_column],
-        ascending=[False, False],
+        sort_columns,
+        ascending=ascending,
+        kind="mergesort",
     ).reset_index(drop=True)
+    ranked_df[rank_column] = np.arange(1, len(ranked_df) + 1)
 
     logger.info(
         "Momentum ranking retained %s of %s rows.",
@@ -145,6 +160,17 @@ def _normalize_to_100(values: pd.Series) -> pd.Series:
     return ((values - minimum) / (maximum - minimum)) * 100
 
 
+def _zscore(values: pd.Series) -> pd.Series:
+    """Return z-score normalization with division-by-zero protection."""
+
+    standard_deviation = values.std(ddof=0)
+
+    if standard_deviation == 0 or pd.isna(standard_deviation):
+        return pd.Series(0.0, index=values.index)
+
+    return (values - values.mean()) / standard_deviation
+
+
 def _validate_columns(stock_df: pd.DataFrame, required_columns: list[str]) -> None:
     """Raise a clear error if required return columns are missing."""
 
@@ -156,4 +182,3 @@ def _validate_columns(stock_df: pd.DataFrame, required_columns: list[str]) -> No
             "Momentum ranking missing required columns: "
             + ", ".join(missing_columns)
         )
-
