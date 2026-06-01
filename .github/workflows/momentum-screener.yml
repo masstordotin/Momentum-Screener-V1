@@ -43,10 +43,10 @@ jobs:
           # GitHub runners use UTC by default.
           # TZ=Asia/Kolkata makes the date match the Indian trading day.
           #
-          # NSE bhavcopy archives are not always available immediately after
-          # market close. A rolling window makes the job resilient on Mondays,
-          # holidays, and delayed-publication days.
-          echo "from_date=$(TZ=Asia/Kolkata date -d '10 days ago' +'%d-%m-%Y')" >> "$GITHUB_OUTPUT"
+          # EMA200 and 6-month returns need substantial history. A one-year
+          # rolling window bootstraps enough data for the filters to produce
+          # usable results, while the collector skips already-downloaded dates.
+          echo "from_date=$(TZ=Asia/Kolkata date -d '365 days ago' +'%d-%m-%Y')" >> "$GITHUB_OUTPUT"
           echo "to_date=$(TZ=Asia/Kolkata date +'%d-%m-%Y')" >> "$GITHUB_OUTPUT"
 
       - name: Fetch NSE raw data
@@ -56,8 +56,9 @@ jobs:
             --from-date "${{ steps.dates.outputs.from_date }}" \
             --to-date "${{ steps.dates.outputs.to_date }}" \
             --eod-source bhavcopy \
-            --pause-seconds 1.0 \
-            --fallback-lookback-days 10
+            --pause-seconds 0.2 \
+            --fallback-lookback-days 10 \
+            --append-to-latest-run
 
       - name: Build processed indicator dataframe
         run: |

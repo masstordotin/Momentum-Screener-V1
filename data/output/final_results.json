@@ -1,5 +1,37 @@
 {
   "row_count": 0,
   "generated_by": "momentum_screening_pipeline",
+  "diagnostics": [
+    {
+      "step": "Input",
+      "rows": 2000,
+      "symbols": 500
+    },
+    {
+      "step": "Trend Filter",
+      "rows": 0,
+      "symbols": 0
+    },
+    {
+      "step": "RSI Filter",
+      "rows": 0,
+      "symbols": 0
+    },
+    {
+      "step": "Volume Filter",
+      "rows": 0,
+      "symbols": 0
+    },
+    {
+      "step": "HH-HL Filter",
+      "rows": 0,
+      "symbols": 0
+    },
+    {
+      "step": "Momentum Ranking",
+      "rows": 0,
+      "symbols": 0
+    }
+  ],
   "results": []
 }

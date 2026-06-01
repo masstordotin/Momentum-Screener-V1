@@ -149,12 +149,14 @@ def collect_nifty500_from_bhavcopy(
     pause_seconds: float,
     fail_if_no_data: bool = True,
     fallback_lookback_days: int = 10,
+    skip_existing: bool = True,
 ) -> None:
     """Collect daily NSE bhavcopy files and filter them to NIFTY 500."""
 
     symbol_set = set(symbols)
     failures: dict[str, str] = {}
     saved_dates = 0
+    existing_dates = 0
 
     print("Using NSE daily bhavcopy fallback for EOD data...")
 
@@ -166,20 +168,23 @@ def collect_nifty500_from_bhavcopy(
 
     for trade_date in trade_dates:
         date_text = trade_date.strftime("%d%m%Y")
+        raw_path = run_dir / "bhavcopy" / f"sec_bhavdata_full_{date_text}.csv"
+        filtered_path = run_dir / "nifty500_bhavcopy" / f"nifty500_eod_{date_text}.csv"
+
+        # GitHub Actions commits raw files back to the repo. Skipping existing
+        # files makes daily runs fast after the first historical bootstrap.
+        if skip_existing and filtered_path.exists():
+            existing_dates += 1
+            print(f"Already have bhavcopy {date_text}, skipping download")
+            continue
 
         try:
             bhavcopy_csv = client.get_security_bhavcopy_csv(date_text)
-            save_raw_text(
-                bhavcopy_csv,
-                run_dir / "bhavcopy" / f"sec_bhavdata_full_{date_text}.csv",
-            )
+            save_raw_text(bhavcopy_csv, raw_path)
 
             fieldnames, rows = filter_bhavcopy_rows(bhavcopy_csv, symbol_set)
             filtered_csv = rows_to_csv(fieldnames, rows)
-            save_raw_text(
-                filtered_csv,
-                run_dir / "nifty500_bhavcopy" / f"nifty500_eod_{date_text}.csv",
-            )
+            save_raw_text(filtered_csv, filtered_path)
 
             saved_dates += 1
             print(f"Saved bhavcopy {date_text}: {len(rows)} NIFTY 500 rows")
@@ -197,12 +202,13 @@ def collect_nifty500_from_bhavcopy(
             "to_date": to_date,
             "fallback_lookback_days": fallback_lookback_days,
             "saved_dates": saved_dates,
+            "existing_dates": existing_dates,
             "failed_dates": failures,
         },
         run_dir / "bhavcopy_manifest.json",
     )
 
-    if saved_dates == 0 and fail_if_no_data:
+    if saved_dates == 0 and existing_dates == 0 and fail_if_no_data:
         raise NSEClientError(
             "No bhavcopy files were downloaded. This can happen on NSE holidays "
             "or when archives are not published yet."
@@ -238,12 +244,12 @@ def collect_nifty500_eod(
     max_consecutive_failures: int = 5,
     eod_source: str = "auto",
     fallback_lookback_days: int = 10,
+    append_to_latest_run: bool = False,
 ) -> None:
     """Collect index snapshot and EOD history for all NIFTY 500 symbols."""
 
     client = NSEClient()
-    run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
-    run_dir = output_dir / "nifty500_eod" / run_id
+    run_dir = _resolve_run_dir(output_dir, append_to_latest_run)
 
     print("Fetching official NIFTY 500 stock list from NSE...")
     stock_list_csv = client.get_nifty500_stock_list_csv()
@@ -356,6 +362,19 @@ def collect_nifty500_eod(
     print(f"Raw NSE data saved to: {run_dir}")
 
 
+def _resolve_run_dir(output_dir: Path, append_to_latest_run: bool) -> Path:
+    """Return a run directory, optionally reusing the latest existing one."""
+
+    base_dir = output_dir / "nifty500_eod"
+    if append_to_latest_run and base_dir.exists():
+        existing_runs = sorted(path for path in base_dir.iterdir() if path.is_dir())
+        if existing_runs:
+            return existing_runs[-1]
+
+    run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
+    return base_dir / run_id
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Collect raw NIFTY 500 EOD data from NSE official APIs."
@@ -397,6 +416,14 @@ def parse_args() -> argparse.Namespace:
             "today's bhavcopy yet."
         ),
     )
+    parser.add_argument(
+        "--append-to-latest-run",
+        action="store_true",
+        help=(
+            "Reuse the latest raw run folder instead of creating a new one. "
+            "Useful for GitHub Actions historical bootstrapping."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -409,4 +436,5 @@ if __name__ == "__main__":
         max_consecutive_failures=args.max_consecutive_failures,
         eod_source=args.eod_source,
         fallback_lookback_days=args.fallback_lookback_days,
+        append_to_latest_run=args.append_to_latest_run,
     )

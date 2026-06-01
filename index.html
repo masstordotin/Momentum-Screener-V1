@@ -89,7 +89,8 @@
 
       <div id="emptyState" class="hidden px-4 py-12 text-center">
         <p class="text-base font-semibold text-zinc-900">No ranked stocks available</p>
-        <p class="mt-1 text-sm text-zinc-500">Run the screening pipeline to generate data/output/final_results.json.</p>
+        <p id="emptyStateMessage" class="mt-1 text-sm text-zinc-500">Run the screening pipeline to generate data/output/final_results.json.</p>
+        <div id="diagnosticsPanel" class="mx-auto mt-4 hidden max-w-xl text-left text-xs text-zinc-600"></div>
       </div>
     </section>
   </main>
@@ -103,6 +104,7 @@
     const state = {
       rows: [],
       filteredRows: [],
+      diagnostics: [],
       sortKey: "rank",
       sortDirection: "asc"
     };
@@ -120,6 +122,8 @@
     const elements = {
       body: document.getElementById("resultsBody"),
       emptyState: document.getElementById("emptyState"),
+      emptyStateMessage: document.getElementById("emptyStateMessage"),
+      diagnosticsPanel: document.getElementById("diagnosticsPanel"),
       statusText: document.getElementById("statusText"),
       searchInput: document.getElementById("searchInput"),
       refreshButton: document.getElementById("refreshButton"),
@@ -155,6 +159,7 @@
 
         state.rows = records.map(normalizeRow).filter((row) => row.symbol !== "-");
         state.filteredRows = [...state.rows];
+        state.diagnostics = Array.isArray(payload.diagnostics) ? payload.diagnostics : [];
         elements.searchInput.value = "";
 
         sortRows();
@@ -165,6 +170,7 @@
         console.error(error);
         state.rows = [];
         state.filteredRows = [];
+        state.diagnostics = [];
         updateMetrics();
         renderTable();
         elements.statusText.textContent = "Results file not found or invalid";
@@ -249,10 +255,12 @@
 
       if (state.filteredRows.length === 0) {
         elements.emptyState.classList.remove("hidden");
+        renderDiagnostics();
         return;
       }
 
       elements.emptyState.classList.add("hidden");
+      elements.diagnosticsPanel.classList.add("hidden");
       const fragment = document.createDocumentFragment();
 
       state.filteredRows.forEach((row) => {
@@ -285,6 +293,33 @@
       });
 
       elements.body.appendChild(fragment);
+    }
+
+    function renderDiagnostics() {
+      if (state.diagnostics.length === 0) {
+        elements.emptyStateMessage.textContent = "Run the screening pipeline to generate data/output/final_results.json.";
+        elements.diagnosticsPanel.classList.add("hidden");
+        elements.diagnosticsPanel.innerHTML = "";
+        return;
+      }
+
+      elements.emptyStateMessage.textContent = "The screener ran, but no stocks passed all filters. Review the filter counts below.";
+      elements.diagnosticsPanel.classList.remove("hidden");
+      elements.diagnosticsPanel.innerHTML = "";
+
+      const list = document.createElement("div");
+      list.className = "divide-y divide-zinc-200 border border-zinc-200 bg-white";
+
+      state.diagnostics.forEach((step) => {
+        const row = document.createElement("div");
+        row.className = "flex items-center justify-between gap-3 px-3 py-2";
+        row.innerHTML = `<span class="font-medium text-zinc-800"></span><span></span>`;
+        row.children[0].textContent = step.step ?? "Step";
+        row.children[1].textContent = `${step.symbols ?? 0} symbols / ${step.rows ?? 0} rows`;
+        list.appendChild(row);
+      });
+
+      elements.diagnosticsPanel.appendChild(list);
     }
 
     function updateMetrics() {

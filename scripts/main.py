@@ -148,6 +148,7 @@ def validate_processed_stock_dataframe(stock_df: pd.DataFrame) -> pd.DataFrame:
 def save_final_results_json(
     ranked_df: pd.DataFrame,
     output_path: Path = DEFAULT_OUTPUT_PATH,
+    diagnostics: list[dict[str, int | str]] | None = None,
 ) -> Path:
     """Save the final ranked dataframe into data/output/final_results.json."""
 
@@ -158,6 +159,7 @@ def save_final_results_json(
     payload = {
         "row_count": len(records),
         "generated_by": "momentum_screening_pipeline",
+        "diagnostics": diagnostics or [],
         "results": records,
     }
 
@@ -178,6 +180,9 @@ def run_momentum_screening_pipeline(
     try:
         stock_df = validate_processed_stock_dataframe(stock_df)
         logger.info("Starting pipeline with %s rows.", len(stock_df))
+        diagnostics: list[dict[str, int | str]] = [
+            _diagnostic_step("Input", stock_df),
+        ]
 
         filtered_df = _run_symbol_filter_step(
             "Trend Filter",
@@ -186,21 +191,25 @@ def run_momentum_screening_pipeline(
             ),
             stock_df,
         )
+        diagnostics.append(_diagnostic_step("Trend Filter", filtered_df))
         filtered_df = _run_symbol_filter_step(
             "RSI Filter",
             lambda df: filter_rsi_momentum_stocks(df, mode=rsi_mode),
             filtered_df,
         )
+        diagnostics.append(_diagnostic_step("RSI Filter", filtered_df))
         filtered_df = _run_symbol_filter_step(
             "Volume Filter",
             filter_volume_expansion_stocks,
             filtered_df,
         )
+        diagnostics.append(_diagnostic_step("Volume Filter", filtered_df))
         filtered_df = _run_symbol_filter_step(
             "HH-HL Filter",
             filter_higher_high_higher_low_stocks,
             filtered_df,
         )
+        diagnostics.append(_diagnostic_step("HH-HL Filter", filtered_df))
 
         # Momentum persistence is a ranking step, so we rank only the latest row
         # for each symbol after all history-aware filters have selected symbols.
@@ -214,8 +223,9 @@ def run_momentum_screening_pipeline(
             rank_momentum_persistence,
             latest_filtered_df,
         )
+        diagnostics.append(_diagnostic_step("Momentum Ranking", ranked_df))
 
-        save_final_results_json(ranked_df, output_path)
+        save_final_results_json(ranked_df, output_path, diagnostics=diagnostics)
         logger.info("Pipeline completed with %s final rows.", len(ranked_df))
 
         return ranked_df
@@ -272,6 +282,25 @@ def _run_symbol_filter_step(
         before_symbols,
     )
     return filtered_df
+
+
+def _diagnostic_step(
+    step_name: str,
+    stock_df: pd.DataFrame,
+    symbol_column: str = "symbol",
+) -> dict[str, int | str]:
+    """Return small row/symbol counts for final_results.json diagnostics."""
+
+    symbol_count = (
+        int(stock_df[symbol_column].nunique())
+        if symbol_column in stock_df.columns
+        else 0
+    )
+    return {
+        "step": step_name,
+        "rows": int(len(stock_df)),
+        "symbols": symbol_count,
+    }
 
 
 def _merge_filter_annotations(
