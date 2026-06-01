@@ -69,15 +69,20 @@ jobs:
 
       - name: Run full screening pipeline
         run: |
-          # This generates data/output/final_results.json.
+          # This generates:
+          # - data/output/final_results.json for the root dashboard
+          # - data/output/momentum-picks.json for flat/static dashboards
+          # - momentum-picks.json at repo root for GitHub Pages compatibility
           python scripts/main.py \
             --input data/processed/processed_stocks.csv \
             --output data/output/final_results.json
 
       - name: Verify final results were generated
         run: |
-          # Fail loudly if the dashboard input was not produced.
+          # Fail loudly if either dashboard input was not produced.
           test -f data/output/final_results.json
+          test -f data/output/momentum-picks.json
+          test -f momentum-picks.json
 
       - name: Commit updated data files
         run: |
@@ -86,7 +91,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           # Add raw NSE data and final dashboard results.
-          git add data/raw data/processed data/output
+          git add data/raw data/processed data/output momentum-picks.json
 
           # Only commit when files actually changed.
           if git diff --cached --quiet; then

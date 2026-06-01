@@ -14,6 +14,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import math
 from pathlib import Path
 from typing import Callable
 
@@ -39,6 +40,8 @@ except ImportError:
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_INPUT_PATH = PROJECT_ROOT / "data" / "processed" / "processed_stocks.csv"
 DEFAULT_OUTPUT_PATH = PROJECT_ROOT / "data" / "output" / "final_results.json"
+DEFAULT_PICKS_OUTPUT_PATH = PROJECT_ROOT / "data" / "output" / "momentum-picks.json"
+DEFAULT_ROOT_PICKS_OUTPUT_PATH = PROJECT_ROOT / "momentum-picks.json"
 DEFAULT_LOG_PATH = PROJECT_ROOT / "logs" / "momentum_screener.log"
 
 REQUIRED_PIPELINE_COLUMNS = [
@@ -154,8 +157,9 @@ def save_final_results_json(
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # Convert dataframe rows into plain dictionaries so the JSON is easy to read.
-    records = ranked_df.to_dict(orient="records")
+    # Convert dataframe rows into plain dictionaries so the JSON is easy to read
+    # and safe for browsers to parse.
+    records = _json_safe_records(ranked_df)
     payload = {
         "row_count": len(records),
         "generated_by": "momentum_screening_pipeline",
@@ -164,9 +168,75 @@ def save_final_results_json(
     }
 
     with output_path.open("w", encoding="utf-8") as file:
-        json.dump(payload, file, indent=2, default=str)
+        json.dump(payload, file, indent=2, allow_nan=False)
 
     logger.info("Saved final results to %s.", output_path)
+    return output_path
+
+
+def save_dashboard_momentum_picks_json(
+    ranked_df: pd.DataFrame,
+    output_path: Path = DEFAULT_PICKS_OUTPUT_PATH,
+    mirror_output_path: Path | None = DEFAULT_ROOT_PICKS_OUTPUT_PATH,
+) -> Path:
+    """Save a flat dashboard-friendly JSON file.
+
+    Some static dashboards read a simple list from momentum-picks.json instead
+    of the richer final_results.json payload. Keeping both outputs avoids a
+    front-end/back-end schema mismatch while preserving the main audit trail.
+    """
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    records: list[dict[str, object]] = []
+
+    for row in _json_safe_records(ranked_df):
+        symbol = str(row.get("symbol") or "-").upper()
+        close = _as_float(row.get("close"))
+        ema50 = _as_float(row.get("ema50"))
+
+        records.append(
+            {
+                "rank": row.get("rank"),
+                "name": symbol,
+                "symbol": symbol,
+                "sector": row.get("sector") or "Unclassified",
+                "bucket": "Momentum Leader",
+                "score": _round_or_none(row.get("momentum_score")),
+                "price": _round_or_none(close),
+                "rsi": _round_or_none(row.get("rsi")),
+                "ema50": _round_or_none(ema50),
+                "ema200": _round_or_none(row.get("ema200")),
+                "volRatio": _round_or_none(row.get("volume_expansion")),
+                "ret1m": _round_or_none(row.get("return_1m")),
+                "ret3m": _round_or_none(row.get("return_3m")),
+                "ret6m": _round_or_none(row.get("return_6m")),
+                "setup": "Close > EMA50 > EMA200 with positive momentum persistence",
+                "buyZone": _format_buy_zone(close),
+                "invalid": _format_invalid_level(ema50),
+                "thesis": (
+                    f"{symbol} passed trend, RSI, volume expansion, HH-HL "
+                    "structure, and positive momentum ranking filters."
+                ),
+                "indicator": (
+                    f"RSI {_format_metric(row.get('rsi'))}, "
+                    f"volume expansion {_format_metric(row.get('volume_expansion'))}x, "
+                    f"momentum percentile {_format_metric(row.get('momentum_percentile'))}"
+                ),
+            }
+        )
+
+    with output_path.open("w", encoding="utf-8") as file:
+        json.dump(records, file, indent=2, allow_nan=False)
+
+    logger.info("Saved dashboard momentum picks to %s.", output_path)
+
+    if mirror_output_path is not None:
+        # A root-level mirror is useful for GitHub Pages dashboards that fetch
+        # ./momentum-picks.json from the same folder as index.html.
+        with mirror_output_path.open("w", encoding="utf-8") as file:
+            json.dump(records, file, indent=2, allow_nan=False)
+        logger.info("Saved root dashboard momentum picks to %s.", mirror_output_path)
+
     return output_path
 
 
@@ -226,6 +296,7 @@ def run_momentum_screening_pipeline(
         diagnostics.append(_diagnostic_step("Momentum Ranking", ranked_df))
 
         save_final_results_json(ranked_df, output_path, diagnostics=diagnostics)
+        save_dashboard_momentum_picks_json(ranked_df)
         logger.info("Pipeline completed with %s final rows.", len(ranked_df))
 
         return ranked_df
@@ -380,6 +451,87 @@ def _latest_rows(
     return sorted_df.groupby(symbol_column, as_index=False).tail(1).copy()
 
 
+def _json_safe_records(stock_df: pd.DataFrame) -> list[dict[str, object]]:
+    """Return records containing only JSON-safe Python values.
+
+    Pandas can hold Timestamp, numpy numbers, NaN, and infinite values. Browsers
+    and GitHub Pages need strict JSON, so this function normalizes those values
+    before writing files.
+    """
+
+    records: list[dict[str, object]] = []
+    for row in stock_df.to_dict(orient="records"):
+        records.append(
+            {key: _json_safe_value(value) for key, value in row.items()}
+        )
+    return records
+
+
+def _json_safe_value(value: object) -> object:
+    """Convert one pandas/numpy value into a strict JSON-compatible value."""
+
+    if pd.isna(value):
+        return None
+
+    if isinstance(value, pd.Timestamp):
+        return value.date().isoformat()
+
+    if hasattr(value, "item"):
+        value = value.item()
+
+    if isinstance(value, float) and not math.isfinite(value):
+        return None
+
+    return value
+
+
+def _as_float(value: object) -> float | None:
+    """Safely coerce dashboard numeric values."""
+
+    if value is None:
+        return None
+
+    try:
+        numeric_value = float(value)
+    except (TypeError, ValueError):
+        return None
+
+    if not math.isfinite(numeric_value):
+        return None
+
+    return numeric_value
+
+
+def _round_or_none(value: object, digits: int = 2) -> float | None:
+    """Round a numeric value for compact dashboard display."""
+
+    numeric_value = _as_float(value)
+    return None if numeric_value is None else round(numeric_value, digits)
+
+
+def _format_metric(value: object) -> str:
+    """Format a metric for the dashboard thesis text."""
+
+    numeric_value = _as_float(value)
+    return "N/A" if numeric_value is None else f"{numeric_value:.2f}"
+
+
+def _format_buy_zone(close: float | None) -> str:
+    """Create a simple reference zone around the latest close."""
+
+    if close is None:
+        return "N/A"
+    return f"{close * 0.99:.2f}-{close * 1.01:.2f}"
+
+
+def _format_invalid_level(ema50: float | None) -> str:
+    """Use EMA50 as the practical trend invalidation reference."""
+
+    if ema50 is None:
+        return "N/A"
+    return f"Daily close below EMA50 ({ema50:.2f})"
+
+
 def parse_args() -> argparse.Namespace:
     """Parse command-line arguments for running the pipeline manually."""
 
@@ -407,80 +559,6 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def generate_processed_stock_dataframe(output_path: Path) -> Path:
-    """
-    Generate processed stock dataframe if it does not exist.
-
-    This is a temporary bootstrap implementation until a dedicated
-    processing pipeline module is added.
-    """
-
-    logger.info("Generating processed stock dataframe...")
-
-    raw_path = PROJECT_ROOT / "data" / "raw" / "nifty500.json"
-
-    if not raw_path.exists():
-        raise FileNotFoundError(
-            f"Raw NSE data not found: {raw_path}"
-        )
-
-    try:
-        raw_df = pd.read_json(raw_path)
-
-        # Normalize column names
-        raw_df.columns = [column.strip().lower() for column in raw_df.columns]
-
-        required_columns = [
-            "symbol",
-            "date",
-            "close",
-            "volume",
-            "high",
-            "low",
-        ]
-
-        missing_columns = [
-            column for column in required_columns
-            if column not in raw_df.columns
-        ]
-
-        if missing_columns:
-            raise ValueError(
-                "Missing required raw columns: "
-                + ", ".join(missing_columns)
-            )
-
-        processed_df = raw_df.copy()
-
-        # Placeholder EMA calculations
-        processed_df["ema50"] = processed_df["close"]
-        processed_df["ema200"] = processed_df["close"]
-
-        # Placeholder RSI
-        processed_df["rsi"] = 50
-
-        # Placeholder returns
-        processed_df["return_1m"] = 0
-        processed_df["return_3m"] = 0
-        processed_df["return_6m"] = 0
-
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-
-        processed_df.to_csv(output_path, index=False)
-
-        logger.info(
-            "Generated processed dataframe at %s",
-            output_path,
-        )
-
-        return output_path
-
-    except Exception as exc:
-        raise RuntimeError(
-            f"Failed to generate processed dataframe: {exc}"
-        ) from exc
-
-
 def main() -> None:
     """CLI entry point."""
 
@@ -497,14 +575,12 @@ def main() -> None:
     ]:
         directory.mkdir(parents=True, exist_ok=True)
 
-    # Auto-generate processed data if missing
     if not args.input.exists():
-        logger.warning(
-            "Processed dataframe not found: %s",
-            args.input,
+        raise FileNotFoundError(
+            "Processed dataframe not found. Run "
+            "scripts/indicators/indicator_engine.py before scripts/main.py: "
+            f"{args.input}"
         )
-
-        generate_processed_stock_dataframe(args.input)
 
     processed_df = load_processed_stock_dataframe(args.input)
 

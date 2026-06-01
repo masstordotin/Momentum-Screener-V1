@@ -77,6 +77,7 @@ def clean_bhavcopy_dataframe(raw_df: pd.DataFrame) -> pd.DataFrame:
     clean_df["symbol"] = clean_df["symbol"].astype(str).str.strip().str.upper()
     clean_df["date"] = pd.to_datetime(
         clean_df["date"].astype(str).str.strip(),
+        format="mixed",
         dayfirst=True,
         errors="coerce",
     )
