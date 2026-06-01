@@ -148,6 +148,7 @@ def collect_nifty500_from_bhavcopy(
     run_dir: Path,
     pause_seconds: float,
     fail_if_no_data: bool = True,
+    fallback_lookback_days: int = 10,
 ) -> None:
     """Collect daily NSE bhavcopy files and filter them to NIFTY 500."""
 
@@ -157,7 +158,13 @@ def collect_nifty500_from_bhavcopy(
 
     print("Using NSE daily bhavcopy fallback for EOD data...")
 
-    for trade_date in iter_dates(from_date, to_date):
+    requested_dates = iter_dates(from_date, to_date)
+    trade_dates = _extend_with_fallback_dates(
+        requested_dates,
+        fallback_lookback_days=fallback_lookback_days,
+    )
+
+    for trade_date in trade_dates:
         date_text = trade_date.strftime("%d%m%Y")
 
         try:
@@ -188,6 +195,7 @@ def collect_nifty500_from_bhavcopy(
             "source": "NSE official daily bhavcopy archive",
             "from_date": from_date,
             "to_date": to_date,
+            "fallback_lookback_days": fallback_lookback_days,
             "saved_dates": saved_dates,
             "failed_dates": failures,
         },
@@ -201,6 +209,27 @@ def collect_nifty500_from_bhavcopy(
         )
 
 
+def _extend_with_fallback_dates(
+    requested_dates: list[date],
+    fallback_lookback_days: int,
+) -> list[date]:
+    """Add recent prior dates so CI survives delayed same-day bhavcopy archives."""
+
+    if not requested_dates or fallback_lookback_days <= 0:
+        return requested_dates
+
+    end_date = max(requested_dates)
+    fallback_start = end_date - timedelta(days=fallback_lookback_days)
+    fallback_dates = [
+        fallback_start + timedelta(days=offset)
+        for offset in range((end_date - fallback_start).days + 1)
+    ]
+
+    # Keep dates sorted and unique. Weekends/holidays will be skipped naturally
+    # when NSE returns 404 for those archive files.
+    return sorted(set(requested_dates + fallback_dates))
+
+
 def collect_nifty500_eod(
     from_date: str,
     to_date: str,
@@ -208,6 +237,7 @@ def collect_nifty500_eod(
     pause_seconds: float = 0.4,
     max_consecutive_failures: int = 5,
     eod_source: str = "auto",
+    fallback_lookback_days: int = 10,
 ) -> None:
     """Collect index snapshot and EOD history for all NIFTY 500 symbols."""
 
@@ -236,7 +266,13 @@ def collect_nifty500_eod(
 
     if eod_source == "bhavcopy":
         collect_nifty500_from_bhavcopy(
-            client, symbols, from_date, to_date, run_dir, pause_seconds
+            client,
+            symbols,
+            from_date,
+            to_date,
+            run_dir,
+            pause_seconds,
+            fallback_lookback_days=fallback_lookback_days,
         )
         print(f"Raw NSE data saved to: {run_dir}")
         return
@@ -272,7 +308,13 @@ def collect_nifty500_eod(
         if eod_source == "auto":
             print("Falling back to NSE daily bhavcopy archives.")
             collect_nifty500_from_bhavcopy(
-                client, symbols, from_date, to_date, run_dir, pause_seconds
+                client,
+                symbols,
+                from_date,
+                to_date,
+                run_dir,
+                pause_seconds,
+                fallback_lookback_days=fallback_lookback_days,
             )
         print(f"Raw NSE data saved to: {run_dir}")
         return
@@ -346,6 +388,15 @@ def parse_args() -> argparse.Namespace:
         default="auto",
         help="EOD source: api, bhavcopy, or auto fallback.",
     )
+    parser.add_argument(
+        "--fallback-lookback-days",
+        type=int,
+        default=10,
+        help=(
+            "Extra recent calendar days to try when NSE has not published "
+            "today's bhavcopy yet."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -357,4 +408,5 @@ if __name__ == "__main__":
         pause_seconds=args.pause_seconds,
         max_consecutive_failures=args.max_consecutive_failures,
         eod_source=args.eod_source,
+        fallback_lookback_days=args.fallback_lookback_days,
     )

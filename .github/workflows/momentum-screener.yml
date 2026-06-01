@@ -36,22 +36,28 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Calculate NSE collection date
+      - name: Calculate NSE collection window
         id: dates
         shell: bash
         run: |
           # GitHub runners use UTC by default.
           # TZ=Asia/Kolkata makes the date match the Indian trading day.
-          echo "trade_date=$(TZ=Asia/Kolkata date +'%d-%m-%Y')" >> "$GITHUB_OUTPUT"
+          #
+          # NSE bhavcopy archives are not always available immediately after
+          # market close. A rolling window makes the job resilient on Mondays,
+          # holidays, and delayed-publication days.
+          echo "from_date=$(TZ=Asia/Kolkata date -d '10 days ago' +'%d-%m-%Y')" >> "$GITHUB_OUTPUT"
+          echo "to_date=$(TZ=Asia/Kolkata date +'%d-%m-%Y')" >> "$GITHUB_OUTPUT"
 
       - name: Fetch NSE raw data
         run: |
           # The bhavcopy source is the most reliable official NSE source for CI.
           python scripts/collectors/nifty500_eod_collector.py \
-            --from-date "${{ steps.dates.outputs.trade_date }}" \
-            --to-date "${{ steps.dates.outputs.trade_date }}" \
+            --from-date "${{ steps.dates.outputs.from_date }}" \
+            --to-date "${{ steps.dates.outputs.to_date }}" \
             --eod-source bhavcopy \
-            --pause-seconds 1.0
+            --pause-seconds 1.0 \
+            --fallback-lookback-days 10
 
       - name: Build processed indicator dataframe
         run: |
