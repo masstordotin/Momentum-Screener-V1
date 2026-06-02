@@ -1,122 +1,59 @@
 {
-  "row_count": 4,
+  "row_count": 1,
   "generated_by": "momentum_screening_pipeline",
   "diagnostics": [
     {
       "step": "Input",
-      "rows": 121159,
+      "rows": 121659,
       "symbols": 500
     },
     {
       "step": "Trend Filter",
-      "rows": 35821,
-      "symbols": 145
+      "rows": 36215,
+      "symbols": 146
     },
     {
       "step": "RSI Filter",
-      "rows": 11353,
-      "symbols": 46
+      "rows": 9929,
+      "symbols": 40
     },
     {
       "step": "Volume Filter",
-      "rows": 2728,
-      "symbols": 11
+      "rows": 996,
+      "symbols": 4
     },
     {
       "step": "HH-HL Filter",
-      "rows": 992,
-      "symbols": 4
+      "rows": 249,
+      "symbols": 1
     },
     {
       "step": "Momentum Ranking",
-      "rows": 4,
-      "symbols": 4
+      "rows": 1,
+      "symbols": 1
     }
   ],
   "results": [
     {
-      "symbol": "MOTHERSON",
-      "date": "2026-06-01",
-      "high": 146.8,
-      "low": 141.13,
-      "close": 141.77,
-      "volume": 38855400,
-      "ema50": 127.35489119961557,
-      "ema200": 123.31272211932118,
-      "rsi": 64.91128212245528,
-      "return_1m": 15.035702693930553,
-      "return_3m": 8.370279773734923,
-      "return_6m": 29.802234023072717,
-      "avg_volume_30": 25350862.1,
-      "volume_expansion": 1.5327052723780938,
-      "momentum": 17.439118080135675,
-      "momentum_zscore": 1.131906910930968,
+      "symbol": "NMDC",
+      "date": "2026-06-02",
+      "high": 97.24,
+      "low": 92.3,
+      "close": 95.31,
+      "volume": 102137637,
+      "ema50": 87.35601405423922,
+      "ema200": 80.79813122613233,
+      "rsi": 63.06913624267919,
+      "return_1m": 5.466415845966588,
+      "return_3m": 17.957920792079207,
+      "return_6m": 31.10041265474553,
+      "avg_volume_30": 25323252.133333333,
+      "volume_expansion": 4.033353870277778,
+      "momentum": 18.920824468715292,
+      "momentum_zscore": 0.0,
       "momentum_score": 100.0,
       "momentum_percentile": 100.0,
       "rank": 1
-    },
-    {
-      "symbol": "NMDC",
-      "date": "2026-06-01",
-      "high": 93.7,
-      "low": 87.5,
-      "close": 92.37,
-      "volume": 73822842,
-      "ema50": 87.03136156665715,
-      "ema200": 80.65228329875677,
-      "rsi": 58.02518312507998,
-      "return_1m": 0.6976997710672617,
-      "return_3m": 17.057407172728432,
-      "return_6m": 27.33664185277087,
-      "avg_volume_30": 24210620.5,
-      "volume_expansion": 3.04919248145664,
-      "momentum": 16.191418847140334,
-      "momentum_zscore": 0.8433078835228774,
-      "momentum_score": 87.38728061627488,
-      "momentum_percentile": 75.0,
-      "rank": 2
-    },
-    {
-      "symbol": "ELGIEQUIP",
-      "date": "2026-06-01",
-      "high": 594.0,
-      "low": 568.5,
-      "close": 580.25,
-      "volume": 1000662,
-      "ema50": 535.6634055048908,
-      "ema200": 511.00387483515806,
-      "rsi": 63.80372865127942,
-      "return_1m": 2.5448440399399086,
-      "return_3m": 5.62482934376991,
-      "return_6m": 17.021276595744684,
-      "avg_volume_30": 616870.2,
-      "volume_expansion": 1.6221597347383616,
-      "momentum": 9.00492824941683,
-      "momentum_zscore": -0.8189630725963486,
-      "momentum_score": 14.740614764550283,
-      "momentum_percentile": 50.0,
-      "rank": 3
-    },
-    {
-      "symbol": "WELSPUNLIV",
-      "date": "2026-06-01",
-      "high": 146.0,
-      "low": 141.78,
-      "close": 145.13,
-      "volume": 6513894,
-      "ema50": 132.17823681854725,
-      "ema200": 129.40495568885186,
-      "rsi": 65.43156687919486,
-      "return_1m": 11.389976206923013,
-      "return_3m": 4.155303573991676,
-      "return_6m": 10.055357549101384,
-      "avg_volume_30": 2115819.1,
-      "volume_expansion": 3.078663010462473,
-      "momentum": 7.546729333222659,
-      "momentum_zscore": -1.156251721857497,
-      "momentum_score": 0.0,
-      "momentum_percentile": 25.0,
-      "rank": 4
     }
   ]
 }
