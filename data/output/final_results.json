@@ -1,59 +1,122 @@
 {
-  "row_count": 1,
+  "row_count": 4,
   "generated_by": "momentum_screening_pipeline",
   "diagnostics": [
     {
       "step": "Input",
-      "rows": 121659,
+      "rows": 122159,
       "symbols": 500
     },
     {
       "step": "Trend Filter",
-      "rows": 36215,
-      "symbols": 146
+      "rows": 35611,
+      "symbols": 143
     },
     {
       "step": "RSI Filter",
-      "rows": 9929,
-      "symbols": 40
+      "rows": 12719,
+      "symbols": 51
     },
     {
       "step": "Volume Filter",
-      "rows": 996,
-      "symbols": 4
+      "rows": 2750,
+      "symbols": 11
     },
     {
       "step": "HH-HL Filter",
-      "rows": 249,
-      "symbols": 1
+      "rows": 1000,
+      "symbols": 4
     },
     {
       "step": "Momentum Ranking",
-      "rows": 1,
-      "symbols": 1
+      "rows": 4,
+      "symbols": 4
     }
   ],
   "results": [
     {
-      "symbol": "NMDC",
-      "date": "2026-06-02",
-      "high": 97.24,
-      "low": 92.3,
-      "close": 95.31,
-      "volume": 102137637,
-      "ema50": 87.35601405423922,
-      "ema200": 80.79813122613233,
-      "rsi": 63.06913624267919,
-      "return_1m": 5.466415845966588,
-      "return_3m": 17.957920792079207,
-      "return_6m": 31.10041265474553,
-      "avg_volume_30": 25323252.133333333,
-      "volume_expansion": 4.033353870277778,
-      "momentum": 18.920824468715292,
-      "momentum_zscore": 0.0,
+      "symbol": "APARINDS",
+      "date": "2026-06-03",
+      "high": 14080.0,
+      "low": 13270.0,
+      "close": 13538.0,
+      "volume": 231576,
+      "ema50": 11869.54682271508,
+      "ema200": 9984.917042517818,
+      "rsi": 63.54850205545242,
+      "return_1m": 8.808873171515842,
+      "return_3m": 27.970507609414884,
+      "return_6m": 47.85125320810353,
+      "avg_volume_30": 120818.86666666668,
+      "volume_expansion": 1.916720512193736,
+      "momentum": 29.293428200369046,
+      "momentum_zscore": 1.0416308641570446,
       "momentum_score": 100.0,
       "momentum_percentile": 100.0,
       "rank": 1
+    },
+    {
+      "symbol": "J&KBANK",
+      "date": "2026-06-03",
+      "high": 149.31,
+      "low": 141.92,
+      "close": 148.65,
+      "volume": 13152376,
+      "ema50": 130.7318051572278,
+      "ema200": 115.77117127565694,
+      "rsi": 66.67300161213083,
+      "return_1m": 12.92160437556975,
+      "return_3m": 32.35686937939632,
+      "return_6m": 39.62990794664665,
+      "avg_volume_30": 4715209.0,
+      "volume_expansion": 2.7893516490997534,
+      "momentum": 28.143344867591505,
+      "momentum_zscore": 0.8720444225923163,
+      "momentum_score": 92.93575150669909,
+      "momentum_percentile": 75.0,
+      "rank": 2
+    },
+    {
+      "symbol": "NMDC",
+      "date": "2026-06-03",
+      "high": 97.49,
+      "low": 95.07,
+      "close": 96.04,
+      "volume": 48441070,
+      "ema50": 87.69656252270043,
+      "ema200": 80.94979161194196,
+      "rsi": 64.2188679819574,
+      "return_1m": 7.801100011224604,
+      "return_3m": 17.322257512826788,
+      "return_6m": 29.277157087091133,
+      "avg_volume_30": 27350363.5,
+      "volume_expansion": 1.7711307566350991,
+      "momentum": 18.467760090929414,
+      "momentum_zscore": -0.5546765336789179,
+      "momentum_score": 33.50463618458754,
+      "momentum_percentile": 50.0,
+      "rank": 3
+    },
+    {
+      "symbol": "ELGIEQUIP",
+      "date": "2026-06-03",
+      "high": 607.0,
+      "low": 580.35,
+      "close": 601.2,
+      "volume": 1223194,
+      "ema50": 540.2562616752184,
+      "ema200": 512.6731553017771,
+      "rsi": 69.77520770479478,
+      "return_1m": 8.451339406512126,
+      "return_3m": 10.322047894302225,
+      "return_6m": 20.56552692269129,
+      "avg_volume_30": 623864.5666666667,
+      "volume_expansion": 1.9606723403696005,
+      "momentum": 13.01309301866961,
+      "momentum_zscore": -1.3589987530704444,
+      "momentum_score": 0.0,
+      "momentum_percentile": 25.0,
+      "rank": 4
     }
   ]
 }
