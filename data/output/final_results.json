@@ -1,80 +1,122 @@
 {
-  "row_count": 2,
+  "row_count": 4,
   "generated_by": "momentum_screening_pipeline",
   "diagnostics": [
     {
       "step": "Input",
-      "rows": 123659,
+      "rows": 124159,
       "symbols": 500
     },
     {
       "step": "Trend Filter",
-      "rows": 31770,
-      "symbols": 126
+      "rows": 37230,
+      "symbols": 147
     },
     {
       "step": "RSI Filter",
-      "rows": 9071,
-      "symbols": 36
+      "rows": 15966,
+      "symbols": 63
     },
     {
       "step": "Volume Filter",
-      "rows": 3000,
-      "symbols": 12
+      "rows": 3302,
+      "symbols": 13
     },
     {
       "step": "HH-HL Filter",
-      "rows": 506,
-      "symbols": 2
+      "rows": 1016,
+      "symbols": 4
     },
     {
       "step": "Momentum Ranking",
-      "rows": 2,
-      "symbols": 2
+      "rows": 4,
+      "symbols": 4
     }
   ],
   "results": [
     {
-      "symbol": "ADANIENSOL",
-      "date": "2026-06-08",
-      "high": 1614.8,
-      "low": 1535.1,
-      "close": 1570.4,
-      "volume": 6296050,
-      "ema50": 1322.6511665092955,
-      "ema200": 1086.4348594696523,
-      "rsi": 69.81395557142275,
-      "return_1m": 13.214620431115298,
-      "return_3m": 61.51393602797492,
-      "return_6m": 57.18146331698528,
-      "avg_volume_30": 4168340.5,
-      "volume_expansion": 1.5104452239446369,
-      "momentum": 43.96969022140965,
-      "momentum_zscore": 1.0000000000000009,
+      "symbol": "J&KBANK",
+      "date": "2026-06-09",
+      "high": 157.89,
+      "low": 148.3,
+      "close": 156.98,
+      "volume": 10294037,
+      "ema50": 133.6150083969703,
+      "ema200": 117.11804995952336,
+      "rsi": 72.93703708299418,
+      "return_1m": 10.736455981941306,
+      "return_3m": 35.04817618719889,
+      "return_6m": 46.477559018382,
+      "avg_volume_30": 4898412.233333333,
+      "volume_expansion": 2.1015048365978344,
+      "momentum": 31.252767659900726,
+      "momentum_zscore": 1.3299409522481662,
       "momentum_score": 100.0,
       "momentum_percentile": 100.0,
       "rank": 1
     },
     {
-      "symbol": "HSCL",
-      "date": "2026-06-08",
-      "high": 692.15,
-      "low": 633.8,
-      "close": 667.2,
-      "volume": 26999921,
-      "ema50": 567.8938888550658,
-      "ema200": 503.1830512573093,
-      "rsi": 68.14265042368486,
-      "return_1m": 8.505448040331775,
-      "return_3m": 45.85200568368128,
-      "return_6m": 52.57260461925453,
-      "avg_volume_30": 13859610.5,
-      "volume_expansion": 1.948100994613088,
-      "momentum": 36.48573316087255,
-      "momentum_zscore": -0.999999999999999,
-      "momentum_score": 0.0,
-      "momentum_percentile": 50.0,
+      "symbol": "ABSLAMC",
+      "date": "2026-06-09",
+      "high": 1066.7,
+      "low": 1041.0,
+      "close": 1062.4,
+      "volume": 996871,
+      "ema50": 1010.1855396590596,
+      "ema200": 899.9467563137325,
+      "rsi": 56.57862257188305,
+      "return_1m": -0.9324878776575952,
+      "return_3m": 22.40336424909268,
+      "return_6m": 46.05444047291725,
+      "avg_volume_30": 428719.0,
+      "volume_expansion": 2.325231678558683,
+      "momentum": 24.956287888363185,
+      "momentum_zscore": 0.6027192431024535,
+      "momentum_score": 68.52389653487504,
+      "momentum_percentile": 75.0,
       "rank": 2
+    },
+    {
+      "symbol": "APOLLOHOSP",
+      "date": "2026-06-09",
+      "high": 8538.5,
+      "low": 8365.5,
+      "close": 8524.0,
+      "volume": 818210,
+      "ema50": 7950.682916907182,
+      "ema200": 7560.646750261578,
+      "rsi": 68.86927528875184,
+      "return_1m": 5.273558107941212,
+      "return_3m": 11.192277589355593,
+      "return_6m": 17.70229218447943,
+      "avg_volume_30": 460442.93333333335,
+      "volume_expansion": 1.7770063144994876,
+      "momentum": 11.493311772186694,
+      "momentum_zscore": -0.9522080903658173,
+      "momentum_score": 1.2224766054660492,
+      "momentum_percentile": 50.0,
+      "rank": 3
+    },
+    {
+      "symbol": "IGIL",
+      "date": "2026-06-09",
+      "high": 377.0,
+      "low": 358.25,
+      "close": 372.05,
+      "volume": 1115979,
+      "ema50": 350.93616820245774,
+      "ema200": 345.5412352649507,
+      "rsi": 58.39734592325823,
+      "return_1m": 5.024700070571631,
+      "return_3m": 15.00772797527048,
+      "return_6m": 14.353772859996926,
+      "avg_volume_30": 618924.2666666667,
+      "volume_expansion": 1.8030945950953177,
+      "momentum": 11.248767550694241,
+      "momentum_zscore": -0.9804521049848022,
+      "momentum_score": 0.0,
+      "momentum_percentile": 25.0,
+      "rank": 4
     }
   ]
 }
