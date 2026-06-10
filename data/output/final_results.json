@@ -1,122 +1,80 @@
 {
-  "row_count": 4,
+  "row_count": 2,
   "generated_by": "momentum_screening_pipeline",
   "diagnostics": [
     {
       "step": "Input",
-      "rows": 124159,
+      "rows": 124659,
       "symbols": 500
     },
     {
       "step": "Trend Filter",
-      "rows": 37230,
-      "symbols": 147
+      "rows": 32501,
+      "symbols": 128
     },
     {
       "step": "RSI Filter",
-      "rows": 15966,
-      "symbols": 63
+      "rows": 9654,
+      "symbols": 38
     },
     {
       "step": "Volume Filter",
-      "rows": 3302,
-      "symbols": 13
+      "rows": 2040,
+      "symbols": 8
     },
     {
       "step": "HH-HL Filter",
-      "rows": 1016,
-      "symbols": 4
+      "rows": 765,
+      "symbols": 3
     },
     {
       "step": "Momentum Ranking",
-      "rows": 4,
-      "symbols": 4
+      "rows": 2,
+      "symbols": 2
     }
   ],
   "results": [
     {
-      "symbol": "J&KBANK",
-      "date": "2026-06-09",
-      "high": 157.89,
-      "low": 148.3,
-      "close": 156.98,
-      "volume": 10294037,
-      "ema50": 133.6150083969703,
-      "ema200": 117.11804995952336,
-      "rsi": 72.93703708299418,
-      "return_1m": 10.736455981941306,
-      "return_3m": 35.04817618719889,
-      "return_6m": 46.477559018382,
-      "avg_volume_30": 4898412.233333333,
-      "volume_expansion": 2.1015048365978344,
-      "momentum": 31.252767659900726,
-      "momentum_zscore": 1.3299409522481662,
+      "symbol": "ABSLAMC",
+      "date": "2026-06-10",
+      "high": 1118.4,
+      "low": 1062.5,
+      "close": 1110.3,
+      "volume": 626477,
+      "ema50": 1014.1115969273316,
+      "ema200": 902.0398234150884,
+      "rsi": 64.04102693010132,
+      "return_1m": 4.81450014160294,
+      "return_3m": 24.39639235897149,
+      "return_6m": 53.53661066168844,
+      "avg_volume_30": 402943.93333333335,
+      "volume_expansion": 1.554749800592605,
+      "momentum": 29.69646200068741,
+      "momentum_zscore": 1.0,
       "momentum_score": 100.0,
       "momentum_percentile": 100.0,
       "rank": 1
     },
     {
-      "symbol": "ABSLAMC",
-      "date": "2026-06-09",
-      "high": 1066.7,
-      "low": 1041.0,
-      "close": 1062.4,
-      "volume": 996871,
-      "ema50": 1010.1855396590596,
-      "ema200": 899.9467563137325,
-      "rsi": 56.57862257188305,
-      "return_1m": -0.9324878776575952,
-      "return_3m": 22.40336424909268,
-      "return_6m": 46.05444047291725,
-      "avg_volume_30": 428719.0,
-      "volume_expansion": 2.325231678558683,
-      "momentum": 24.956287888363185,
-      "momentum_zscore": 0.6027192431024535,
-      "momentum_score": 68.52389653487504,
-      "momentum_percentile": 75.0,
-      "rank": 2
-    },
-    {
-      "symbol": "APOLLOHOSP",
-      "date": "2026-06-09",
-      "high": 8538.5,
-      "low": 8365.5,
-      "close": 8524.0,
-      "volume": 818210,
-      "ema50": 7950.682916907182,
-      "ema200": 7560.646750261578,
-      "rsi": 68.86927528875184,
-      "return_1m": 5.273558107941212,
-      "return_3m": 11.192277589355593,
-      "return_6m": 17.70229218447943,
-      "avg_volume_30": 460442.93333333335,
-      "volume_expansion": 1.7770063144994876,
-      "momentum": 11.493311772186694,
-      "momentum_zscore": -0.9522080903658173,
-      "momentum_score": 1.2224766054660492,
-      "momentum_percentile": 50.0,
-      "rank": 3
-    },
-    {
-      "symbol": "IGIL",
-      "date": "2026-06-09",
-      "high": 377.0,
-      "low": 358.25,
-      "close": 372.05,
-      "volume": 1115979,
-      "ema50": 350.93616820245774,
-      "ema200": 345.5412352649507,
-      "rsi": 58.39734592325823,
-      "return_1m": 5.024700070571631,
-      "return_3m": 15.00772797527048,
-      "return_6m": 14.353772859996926,
-      "avg_volume_30": 618924.2666666667,
-      "volume_expansion": 1.8030945950953177,
-      "momentum": 11.248767550694241,
-      "momentum_zscore": -0.9804521049848022,
+      "symbol": "AXISBANK",
+      "date": "2026-06-10",
+      "high": 1326.5,
+      "low": 1283.5,
+      "close": 1314.5,
+      "volume": 12262606,
+      "ema50": 1282.7455245032927,
+      "ema200": 1258.918146127245,
+      "rsi": 59.49920952995448,
+      "return_1m": 3.3168277921873823,
+      "return_3m": -2.564672744792817,
+      "return_6m": 3.4469190210120404,
+      "avg_volume_30": 7600976.266666667,
+      "volume_expansion": 1.61329355201074,
+      "momentum": 1.2727313434044474,
+      "momentum_zscore": -1.0000000000000002,
       "momentum_score": 0.0,
-      "momentum_percentile": 25.0,
-      "rank": 4
+      "momentum_percentile": 50.0,
+      "rank": 2
     }
   ]
 }
