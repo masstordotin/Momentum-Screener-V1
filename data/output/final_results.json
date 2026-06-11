@@ -4,27 +4,27 @@
   "diagnostics": [
     {
       "step": "Input",
-      "rows": 124659,
+      "rows": 125159,
       "symbols": 500
     },
     {
       "step": "Trend Filter",
-      "rows": 32501,
-      "symbols": 128
+      "rows": 32373,
+      "symbols": 127
     },
     {
       "step": "RSI Filter",
-      "rows": 9654,
-      "symbols": 38
+      "rows": 11453,
+      "symbols": 45
     },
     {
       "step": "Volume Filter",
-      "rows": 2040,
-      "symbols": 8
+      "rows": 1249,
+      "symbols": 5
     },
     {
       "step": "HH-HL Filter",
-      "rows": 765,
+      "rows": 737,
       "symbols": 3
     },
     {
@@ -35,43 +35,43 @@
   ],
   "results": [
     {
-      "symbol": "ABSLAMC",
-      "date": "2026-06-10",
-      "high": 1118.4,
-      "low": 1062.5,
-      "close": 1110.3,
-      "volume": 626477,
-      "ema50": 1014.1115969273316,
-      "ema200": 902.0398234150884,
-      "rsi": 64.04102693010132,
-      "return_1m": 4.81450014160294,
-      "return_3m": 24.39639235897149,
-      "return_6m": 53.53661066168844,
-      "avg_volume_30": 402943.93333333335,
-      "volume_expansion": 1.554749800592605,
-      "momentum": 29.69646200068741,
+      "symbol": "APARINDS",
+      "date": "2026-06-11",
+      "high": 14970.0,
+      "low": 14025.0,
+      "close": 14551.0,
+      "volume": 424301,
+      "ema50": 12296.235041015654,
+      "ema200": 10210.333891268549,
+      "rsi": 68.35159867942687,
+      "return_1m": 16.791074725098333,
+      "return_3m": 39.99422743890706,
+      "return_6m": 64.46453800508618,
+      "avg_volume_30": 121957.06666666668,
+      "volume_expansion": 3.479101388685417,
+      "momentum": 41.14229837872626,
       "momentum_zscore": 1.0,
       "momentum_score": 100.0,
       "momentum_percentile": 100.0,
       "rank": 1
     },
     {
-      "symbol": "AXISBANK",
-      "date": "2026-06-10",
-      "high": 1326.5,
-      "low": 1283.5,
-      "close": 1314.5,
-      "volume": 12262606,
-      "ema50": 1282.7455245032927,
-      "ema200": 1258.918146127245,
-      "rsi": 59.49920952995448,
-      "return_1m": 3.3168277921873823,
-      "return_3m": -2.564672744792817,
-      "return_6m": 3.4469190210120404,
-      "avg_volume_30": 7600976.266666667,
-      "volume_expansion": 1.61329355201074,
-      "momentum": 1.2727313434044474,
-      "momentum_zscore": -1.0000000000000002,
+      "symbol": "ABDL",
+      "date": "2026-06-11",
+      "high": 612.0,
+      "low": 560.0,
+      "close": 608.45,
+      "volume": 1306233,
+      "ema50": 540.4261163260227,
+      "ema200": 518.4844732389267,
+      "rsi": 66.53677251760749,
+      "return_1m": 7.225306194378356,
+      "return_3m": 28.20269700800675,
+      "return_6m": -3.2363231552162697,
+      "avg_volume_30": 305212.4666666667,
+      "volume_expansion": 4.27974982236418,
+      "momentum": 8.611341079191188,
+      "momentum_zscore": -0.9999999999999998,
       "momentum_score": 0.0,
       "momentum_percentile": 50.0,
       "rank": 2
