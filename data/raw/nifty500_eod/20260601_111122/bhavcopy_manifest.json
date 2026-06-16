@@ -1,10 +1,10 @@
 {
   "source": "NSE official daily bhavcopy archive",
-  "from_date": "15-06-2025",
-  "to_date": "15-06-2026",
+  "from_date": "16-06-2025",
+  "to_date": "16-06-2026",
   "fallback_lookback_days": 10,
-  "saved_dates": 2,
-  "existing_dates": 309,
+  "saved_dates": 1,
+  "existing_dates": 310,
   "failed_dates": {
     "21062025": "NSE archive request failed with HTTP 404: <!DOCTYPE html>\r\n<html lang=\"en\">\r\n\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <meta http-equiv=\"Content-Type\" content=\"text/h",
     "28062025": "NSE archive request failed with HTTP 404: <!DOCTYPE html>\r\n<html lang=\"en\">\r\n\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <meta http-equiv=\"Content-Type\" content=\"text/h",
