@@ -1,9 +1,9 @@
 {
   "source": "NSE official API",
   "index": "NIFTY 500",
-  "from_date": "23-06-2025",
-  "to_date": "23-06-2026",
-  "symbol_count": 501,
+  "from_date": "24-06-2025",
+  "to_date": "24-06-2026",
+  "symbol_count": 500,
   "symbols": [
     "360ONE",
     "3MINDIA",
@@ -490,7 +490,6 @@
     "VEDL",
     "VIJAYA",
     "VMM",
-    "VOGL",
     "VOLTAS",
     "VTL",
     "WAAREEENER",
