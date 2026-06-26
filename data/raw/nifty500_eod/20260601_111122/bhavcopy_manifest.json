@@ -1,7 +1,7 @@
 {
   "source": "NSE official daily bhavcopy archive",
-  "from_date": "25-06-2025",
-  "to_date": "25-06-2026",
+  "from_date": "26-06-2025",
+  "to_date": "26-06-2026",
   "fallback_lookback_days": 10,
   "saved_dates": 1,
   "existing_dates": 310,
