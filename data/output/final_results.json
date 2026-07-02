@@ -4,27 +4,27 @@
   "diagnostics": [
     {
       "step": "Input",
-      "rows": 131659,
+      "rows": 131702,
       "symbols": 500
     },
     {
       "step": "Trend Filter",
-      "rows": 46060,
-      "symbols": 172
+      "rows": 45809,
+      "symbols": 171
     },
     {
       "step": "RSI Filter",
-      "rows": 25497,
+      "rows": 25473,
       "symbols": 95
     },
     {
       "step": "Volume Filter",
-      "rows": 2364,
+      "rows": 2330,
       "symbols": 9
     },
     {
       "step": "HH-HL Filter",
-      "rows": 1076,
+      "rows": 1077,
       "symbols": 4
     },
     {
@@ -34,27 +34,6 @@
     }
   ],
   "results": [
-    {
-      "symbol": "ADANIENT",
-      "date": "2026-07-01",
-      "high": 3149.8,
-      "low": 3012.8,
-      "close": 3143.6,
-      "volume": 3415655,
-      "ema50": 2763.3862400397097,
-      "ema200": 2456.085052912331,
-      "rsi": 65.88099465893819,
-      "return_1m": 8.049769711968091,
-      "return_3m": 66.6277960351956,
-      "return_6m": 39.79011028103876,
-      "avg_volume_30": 2270085.5,
-      "volume_expansion": 1.5046371601422062,
-      "momentum": 37.5143368653678,
-      "momentum_zscore": 1.4671069974645237,
-      "momentum_score": 100.0,
-      "momentum_percentile": 100.0,
-      "rank": 1
-    },
     {
       "symbol": "PAGEIND",
       "date": "2026-07-01",
@@ -71,10 +50,10 @@
       "avg_volume_30": 36419.93333333333,
       "volume_expansion": 2.384847858041109,
       "momentum": 21.05068706338556,
-      "momentum_zscore": 0.07180767652952298,
-      "momentum_score": 50.35026112360709,
-      "momentum_percentile": 75.0,
-      "rank": 2
+      "momentum_zscore": 1.1291495897153827,
+      "momentum_score": 100.0,
+      "momentum_percentile": 100.0,
+      "rank": 1
     },
     {
       "symbol": "DELHIVERY",
@@ -92,8 +71,29 @@
       "avg_volume_30": 3433482.3666666667,
       "volume_expansion": 5.251594175946013,
       "momentum": 17.89383663865138,
-      "momentum_zscore": -0.19573635574178017,
-      "momentum_score": 40.830087823941135,
+      "momentum_zscore": 0.6313868149375506,
+      "momentum_score": 81.09210739484655,
+      "momentum_percentile": 75.0,
+      "rank": 2
+    },
+    {
+      "symbol": "AADHARHFC",
+      "date": "2026-07-02",
+      "high": 542.0,
+      "low": 518.0,
+      "close": 535.7,
+      "volume": 1367797,
+      "ema50": 487.9791095996794,
+      "ema200": 481.107118487642,
+      "rsi": 69.01238145950357,
+      "return_1m": 15.167150381597349,
+      "return_3m": 17.38796976005259,
+      "return_6m": 10.02259190798933,
+      "avg_volume_30": 553419.8333333334,
+      "volume_expansion": 2.4715359255586247,
+      "momentum": 12.25885776753098,
+      "momentum_zscore": -0.25711987411140197,
+      "momentum_score": 47.341513925906725,
       "momentum_percentile": 50.0,
       "rank": 3
     },
@@ -113,7 +113,7 @@
       "avg_volume_30": 3479449.7,
       "volume_expansion": 1.8354911122870952,
       "momentum": 4.354746957010283,
-      "momentum_zscore": -1.3431783182522672,
+      "momentum_zscore": -1.503416530541531,
       "momentum_score": 0.0,
       "momentum_percentile": 25.0,
       "rank": 4
