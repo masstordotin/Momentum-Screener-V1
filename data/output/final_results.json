@@ -1,122 +1,59 @@
 {
-  "row_count": 4,
+  "row_count": 1,
   "generated_by": "momentum_screening_pipeline",
   "diagnostics": [
     {
       "step": "Input",
-      "rows": 139202,
+      "rows": 139702,
       "symbols": 501
     },
     {
       "step": "Trend Filter",
-      "rows": 42081,
-      "symbols": 149
+      "rows": 41716,
+      "symbols": 147
     },
     {
       "step": "RSI Filter",
-      "rows": 9894,
-      "symbols": 35
+      "rows": 6225,
+      "symbols": 22
     },
     {
       "step": "Volume Filter",
-      "rows": 2840,
-      "symbols": 10
+      "rows": 855,
+      "symbols": 3
     },
     {
       "step": "HH-HL Filter",
-      "rows": 1136,
-      "symbols": 4
+      "rows": 285,
+      "symbols": 1
     },
     {
       "step": "Momentum Ranking",
-      "rows": 4,
-      "symbols": 4
+      "rows": 1,
+      "symbols": 1
     }
   ],
   "results": [
     {
-      "symbol": "CHENNPETRO",
-      "date": "2026-07-23",
-      "high": 1354.0,
-      "low": 1180.0,
-      "close": 1269.6,
-      "volume": 7077551,
-      "ema50": 1135.4042220470774,
-      "ema200": 984.7050170821522,
-      "rsi": 61.20600485759489,
-      "return_1m": 13.712494402149566,
-      "return_3m": 24.18447694038244,
-      "return_6m": 45.04741231577745,
-      "avg_volume_30": 1333013.0,
-      "volume_expansion": 5.3094388426819545,
-      "momentum": 28.016806888855626,
-      "momentum_zscore": 1.5783271062269935,
+      "symbol": "RKFORGE",
+      "date": "2026-07-24",
+      "high": 588.9,
+      "low": 569.6,
+      "close": 580.7,
+      "volume": 3245747,
+      "ema50": 568.8670773133595,
+      "ema200": 561.046113963739,
+      "rsi": 54.28706237465896,
+      "return_1m": 1.0704029240275137,
+      "return_3m": 4.2642966154951,
+      "return_6m": 17.005843239975825,
+      "avg_volume_30": 1039246.3666666668,
+      "volume_expansion": 3.123173776792292,
+      "momentum": 8.295706865444364,
+      "momentum_zscore": 0.0,
       "momentum_score": 100.0,
       "momentum_percentile": 100.0,
       "rank": 1
-    },
-    {
-      "symbol": "BAJAJ-AUTO",
-      "date": "2026-07-23",
-      "high": 11331.0,
-      "low": 10967.0,
-      "close": 11283.5,
-      "volume": 1025555,
-      "ema50": 10188.88057229009,
-      "ema200": 9645.182870906348,
-      "rsi": 74.25671466025149,
-      "return_1m": 10.720243351977231,
-      "return_3m": 15.220055141427547,
-      "return_6m": 17.787984759121045,
-      "avg_volume_30": 448580.4,
-      "volume_expansion": 2.2862233838125783,
-      "momentum": 13.825259116472129,
-      "momentum_zscore": 0.10935512313716403,
-      "momentum_score": 43.78092110440056,
-      "momentum_percentile": 75.0,
-      "rank": 2
-    },
-    {
-      "symbol": "MRPL",
-      "date": "2026-07-23",
-      "high": 183.0,
-      "low": 173.81,
-      "close": 175.95,
-      "volume": 33299957,
-      "ema50": 161.45698116656354,
-      "ema200": 161.2166537903508,
-      "rsi": 63.858378744655376,
-      "return_1m": 13.97940014251473,
-      "return_3m": -2.607107273331122,
-      "return_6m": 11.114619513735402,
-      "avg_volume_30": 17071201.4,
-      "volume_expansion": 1.9506510537682489,
-      "momentum": 6.459595651997771,
-      "momentum_zscore": -0.6530672313319263,
-      "momentum_score": 14.602228119726144,
-      "momentum_percentile": 50.0,
-      "rank": 3
-    },
-    {
-      "symbol": "IIFL",
-      "date": "2026-07-23",
-      "high": 585.0,
-      "low": 556.1,
-      "close": 568.75,
-      "volume": 5906518,
-      "ema50": 519.5925409746206,
-      "ema200": 502.3214764429127,
-      "rsi": 62.504759377714045,
-      "return_1m": 5.754927482335459,
-      "return_3m": 19.38497061293032,
-      "return_6m": -10.482411269379089,
-      "avg_volume_30": 2096202.7333333332,
-      "volume_expansion": 2.8177226878278088,
-      "momentum": 2.773512172594552,
-      "momentum_zscore": -1.0346149980322308,
-      "momentum_score": 0.0,
-      "momentum_percentile": 25.0,
-      "rank": 4
     }
   ]
 }
