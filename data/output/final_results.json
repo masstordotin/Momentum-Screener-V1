@@ -1,59 +1,101 @@
 {
-  "row_count": 1,
+  "row_count": 3,
   "generated_by": "momentum_screening_pipeline",
   "diagnostics": [
     {
       "step": "Input",
-      "rows": 139702,
+      "rows": 140202,
       "symbols": 501
     },
     {
       "step": "Trend Filter",
-      "rows": 41716,
-      "symbols": 147
+      "rows": 45844,
+      "symbols": 161
     },
     {
       "step": "RSI Filter",
-      "rows": 6225,
-      "symbols": 22
+      "rows": 19370,
+      "symbols": 68
     },
     {
       "step": "Volume Filter",
-      "rows": 855,
-      "symbols": 3
+      "rows": 3432,
+      "symbols": 12
     },
     {
       "step": "HH-HL Filter",
-      "rows": 285,
-      "symbols": 1
+      "rows": 858,
+      "symbols": 3
     },
     {
       "step": "Momentum Ranking",
-      "rows": 1,
-      "symbols": 1
+      "rows": 3,
+      "symbols": 3
     }
   ],
   "results": [
     {
-      "symbol": "RKFORGE",
-      "date": "2026-07-24",
-      "high": 588.9,
-      "low": 569.6,
-      "close": 580.7,
-      "volume": 3245747,
-      "ema50": 568.8670773133595,
-      "ema200": 561.046113963739,
-      "rsi": 54.28706237465896,
-      "return_1m": 1.0704029240275137,
-      "return_3m": 4.2642966154951,
-      "return_6m": 17.005843239975825,
-      "avg_volume_30": 1039246.3666666668,
-      "volume_expansion": 3.123173776792292,
-      "momentum": 8.295706865444364,
-      "momentum_zscore": 0.0,
+      "symbol": "LLOYDSME",
+      "date": "2026-07-27",
+      "high": 2037.0,
+      "low": 1928.0,
+      "close": 2014.9,
+      "volume": 1480673,
+      "ema50": 1778.2158620146577,
+      "ema200": 1539.618375800862,
+      "rsi": 70.4794684889142,
+      "return_1m": 18.224490993369717,
+      "return_3m": 18.677111556131475,
+      "return_6m": 67.08682311966166,
+      "avg_volume_30": 498262.43333333335,
+      "volume_expansion": 2.971672959758221,
+      "momentum": 36.08276091337805,
+      "momentum_zscore": 1.4030461840718467,
       "momentum_score": 100.0,
       "momentum_percentile": 100.0,
       "rank": 1
+    },
+    {
+      "symbol": "RKFORGE",
+      "date": "2026-07-27",
+      "high": 635.55,
+      "low": 595.0,
+      "close": 625.45,
+      "volume": 12147443,
+      "ema50": 571.0860154579336,
+      "ema200": 561.686948650667,
+      "rsi": 67.68060684896477,
+      "return_1m": 9.641511087737742,
+      "return_3m": 13.388324873096447,
+      "return_6m": 26.4046079223929,
+      "avg_volume_30": 1125265.6666666667,
+      "volume_expansion": 10.795177849852935,
+      "momentum": 16.506642848433643,
+      "momentum_zscore": -0.547913020682927,
+      "momentum_score": 13.604771607332674,
+      "momentum_percentile": 66.66666666666666,
+      "rank": 2
+    },
+    {
+      "symbol": "SUNPHARMA",
+      "date": "2026-07-27",
+      "high": 1977.0,
+      "low": 1933.0,
+      "close": 1973.7,
+      "volume": 5414380,
+      "ema50": 1875.765041356227,
+      "ema200": 1780.4929669992998,
+      "rsi": 65.62383823396245,
+      "return_1m": 5.297695262483981,
+      "return_3m": 17.4751502886733,
+      "return_6m": 17.804703354422813,
+      "avg_volume_30": 1954235.6,
+      "volume_expansion": 2.7705871287985957,
+      "momentum": 13.42396548086791,
+      "momentum_zscore": -0.8551331633889196,
+      "momentum_score": 0.0,
+      "momentum_percentile": 33.33333333333333,
+      "rank": 3
     }
   ]
 }
