@@ -1,8 +1,8 @@
 {
   "source": "NSE official API",
   "index": "NIFTY 500",
-  "from_date": "28-08-2025",
-  "to_date": "28-08-2026",
+  "from_date": "29-08-2025",
+  "to_date": "29-08-2026",
   "symbol_count": 500,
   "symbols": [
     "360ONE",
