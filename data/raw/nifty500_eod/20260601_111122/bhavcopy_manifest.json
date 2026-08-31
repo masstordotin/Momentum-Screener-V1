@@ -1,12 +1,11 @@
 {
   "source": "NSE official daily bhavcopy archive",
-  "from_date": "29-08-2025",
-  "to_date": "29-08-2026",
+  "from_date": "31-08-2025",
+  "to_date": "31-08-2026",
   "fallback_lookback_days": 10,
-  "saved_dates": 1,
+  "saved_dates": 2,
   "existing_dates": 311,
   "failed_dates": {
-    "30082025": "NSE archive request failed with HTTP 404: <!DOCTYPE html>\r\n<html lang=\"en\">\r\n\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <meta http-equiv=\"Content-Type\" content=\"text/h",
     "06092025": "NSE archive request failed with HTTP 404: <!DOCTYPE html>\r\n<html lang=\"en\">\r\n\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <meta http-equiv=\"Content-Type\" content=\"text/h",
     "13092025": "NSE archive request failed with HTTP 404: <!DOCTYPE html>\r\n<html lang=\"en\">\r\n\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <meta http-equiv=\"Content-Type\" content=\"text/h",
     "20092025": "NSE archive request failed with HTTP 404: <!DOCTYPE html>\r\n<html lang=\"en\">\r\n\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <meta http-equiv=\"Content-Type\" content=\"text/h",
