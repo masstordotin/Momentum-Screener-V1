@@ -1,9 +1,9 @@
 {
   "source": "NSE official API",
   "index": "NIFTY 500",
-  "from_date": "04-09-2025",
-  "to_date": "04-09-2026",
-  "symbol_count": 500,
+  "from_date": "07-09-2025",
+  "to_date": "07-09-2026",
+  "symbol_count": 501,
   "symbols": [
     "360ONE",
     "3MINDIA",
@@ -149,6 +149,7 @@
     "DMART",
     "DOMS",
     "DRREDDY",
+    "DUMMYHEG",
     "ECLERX",
     "EICHERMOT",
     "EIDPARRY",
