@@ -1,59 +1,80 @@
 {
-  "row_count": 1,
+  "row_count": 2,
   "generated_by": "momentum_screening_pipeline",
   "diagnostics": [
     {
       "step": "Input",
-      "rows": 155696,
+      "rows": 156194,
       "symbols": 501
     },
     {
       "step": "Trend Filter",
-      "rows": 49506,
-      "symbols": 159
+      "rows": 48883,
+      "symbols": 156
     },
     {
       "step": "RSI Filter",
-      "rows": 22135,
-      "symbols": 71
+      "rows": 20420,
+      "symbols": 65
     },
     {
       "step": "Volume Filter",
-      "rows": 3170,
-      "symbols": 10
+      "rows": 5092,
+      "symbols": 16
     },
     {
       "step": "HH-HL Filter",
-      "rows": 317,
-      "symbols": 1
+      "rows": 636,
+      "symbols": 2
     },
     {
       "step": "Momentum Ranking",
-      "rows": 1,
-      "symbols": 1
+      "rows": 2,
+      "symbols": 2
     }
   ],
   "results": [
     {
-      "symbol": "DIVISLAB",
-      "date": "2026-09-08",
-      "high": 9588.0,
-      "low": 9253.0,
-      "close": 9575.0,
-      "volume": 838906,
-      "ema50": 8244.231619696146,
-      "ema200": 7118.838203106406,
-      "rsi": 73.41338804543004,
-      "return_1m": 15.36144578313252,
-      "return_3m": 41.788834592033176,
-      "return_6m": 51.59911336288789,
-      "avg_volume_30": 525599.8666666667,
-      "volume_expansion": 1.5960924901300075,
-      "momentum": 36.248584879391615,
-      "momentum_zscore": 0.0,
+      "symbol": "GLAND",
+      "date": "2026-09-09",
+      "high": 3033.9,
+      "low": 2938.6,
+      "close": 3026.2,
+      "volume": 1560855,
+      "ema50": 2687.5593291134214,
+      "ema200": 2215.605482076962,
+      "rsi": 71.97412699189289,
+      "return_1m": 3.4810559430994203,
+      "return_3m": 33.44210247817265,
+      "return_6m": 77.34411626816689,
+      "avg_volume_30": 845634.2,
+      "volume_expansion": 1.8457803622417357,
+      "momentum": 41.66648843933844,
+      "momentum_zscore": 1.000000000000001,
       "momentum_score": 100.0,
       "momentum_percentile": 100.0,
       "rank": 1
+    },
+    {
+      "symbol": "AEGISVOPAK",
+      "date": "2026-09-09",
+      "high": 299.4,
+      "low": 288.8,
+      "close": 297.65,
+      "volume": 1911786,
+      "ema50": 270.9138182160071,
+      "ema200": 244.6272991091581,
+      "rsi": 65.11391891664903,
+      "return_1m": 6.095170201390121,
+      "return_3m": 49.4677111579793,
+      "return_6m": 49.10830578098386,
+      "avg_volume_30": 986833.2,
+      "volume_expansion": 1.9372939621407144,
+      "momentum": 35.702669700065364,
+      "momentum_zscore": -0.9999999999999988,
+      "momentum_score": 0.0,
+      "momentum_percentile": 50.0,
+      "rank": 2
     }
   ]
 }
