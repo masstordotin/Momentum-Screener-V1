@@ -1,101 +1,59 @@
 {
-  "row_count": 3,
+  "row_count": 1,
   "generated_by": "momentum_screening_pipeline",
   "diagnostics": [
     {
       "step": "Input",
-      "rows": 157688,
+      "rows": 158186,
       "symbols": 501
     },
     {
       "step": "Trend Filter",
-      "rows": 31765,
-      "symbols": 102
+      "rows": 31130,
+      "symbols": 99
     },
     {
       "step": "RSI Filter",
-      "rows": 4553,
+      "rows": 4737,
       "symbols": 15
     },
     {
       "step": "Volume Filter",
-      "rows": 1607,
+      "rows": 1612,
       "symbols": 5
     },
     {
       "step": "HH-HL Filter",
-      "rows": 964,
-      "symbols": 3
+      "rows": 322,
+      "symbols": 1
     },
     {
       "step": "Momentum Ranking",
-      "rows": 3,
-      "symbols": 3
+      "rows": 1,
+      "symbols": 1
     }
   ],
   "results": [
     {
-      "symbol": "ACMESOLAR",
-      "date": "2026-09-15",
-      "high": 426.15,
-      "low": 402.15,
-      "close": 420.4,
-      "volume": 5262214,
-      "ema50": 382.5559278936478,
-      "ema200": 322.7831568774485,
-      "rsi": 63.36833335391314,
-      "return_1m": 12.376369954557598,
-      "return_3m": 23.77447372295009,
-      "return_6m": 82.59207783182765,
-      "avg_volume_30": 1987060.1666666667,
-      "volume_expansion": 2.648240897922819,
-      "momentum": 42.644447240527604,
-      "momentum_zscore": 1.097562340612362,
+      "symbol": "AEGISVOPAK",
+      "date": "2026-09-16",
+      "high": 305.0,
+      "low": 288.9,
+      "close": 296.95,
+      "volume": 1920715,
+      "ema50": 274.709824078465,
+      "ema200": 246.66137714942107,
+      "rsi": 60.66919860762598,
+      "return_1m": 10.185528756957329,
+      "return_3m": 24.726982526881702,
+      "return_6m": 53.48632862976173,
+      "avg_volume_30": 1107469.2333333334,
+      "volume_expansion": 1.734328089836777,
+      "momentum": 30.849731961360668,
+      "momentum_zscore": 0.0,
       "momentum_score": 100.0,
       "momentum_percentile": 100.0,
       "rank": 1
-    },
-    {
-      "symbol": "AEGISVOPAK",
-      "date": "2026-09-15",
-      "high": 311.0,
-      "low": 292.8,
-      "close": 302.0,
-      "volume": 4447657,
-      "ema50": 273.80206179595336,
-      "ema200": 246.1559638544404,
-      "rsi": 65.40621271238928,
-      "return_1m": 12.225938312894824,
-      "return_3m": 27.53378378378377,
-      "return_6m": 56.25808454493713,
-      "avg_volume_30": 1028660.6,
-      "volume_expansion": 4.323736128320653,
-      "momentum": 33.20855661568895,
-      "momentum_zscore": 0.2235644008937411,
-      "momentum_score": 63.864808164879584,
-      "momentum_percentile": 66.66666666666666,
-      "rank": 2
-    },
-    {
-      "symbol": "EMCURE",
-      "date": "2026-09-15",
-      "high": 2014.3,
-      "low": 1974.0,
-      "close": 1993.0,
-      "volume": 239137,
-      "ema50": 1882.5168163662852,
-      "ema200": 1692.8478379900962,
-      "rsi": 66.69896491675904,
-      "return_1m": 3.141334161362108,
-      "return_3m": 16.850375234521575,
-      "return_6m": 27.120806225283832,
-      "avg_volume_30": 137940.23333333334,
-      "volume_expansion": 1.733627631483877,
-      "momentum": 16.531701892742426,
-      "momentum_zscore": -1.321126741506104,
-      "momentum_score": 0.0,
-      "momentum_percentile": 33.33333333333333,
-      "rank": 3
     }
   ]
 }
