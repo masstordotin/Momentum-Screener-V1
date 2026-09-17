@@ -1,59 +1,101 @@
 {
-  "row_count": 1,
+  "row_count": 3,
   "generated_by": "momentum_screening_pipeline",
   "diagnostics": [
     {
       "step": "Input",
-      "rows": 158186,
+      "rows": 158684,
       "symbols": 501
     },
     {
       "step": "Trend Filter",
-      "rows": 31130,
-      "symbols": 99
+      "rows": 34387,
+      "symbols": 109
     },
     {
       "step": "RSI Filter",
-      "rows": 4737,
-      "symbols": 15
+      "rows": 6597,
+      "symbols": 21
     },
     {
       "step": "Volume Filter",
-      "rows": 1612,
+      "rows": 1617,
       "symbols": 5
     },
     {
       "step": "HH-HL Filter",
-      "rows": 322,
-      "symbols": 1
+      "rows": 969,
+      "symbols": 3
     },
     {
       "step": "Momentum Ranking",
-      "rows": 1,
-      "symbols": 1
+      "rows": 3,
+      "symbols": 3
     }
   ],
   "results": [
     {
       "symbol": "AEGISVOPAK",
-      "date": "2026-09-16",
-      "high": 305.0,
-      "low": 288.9,
-      "close": 296.95,
-      "volume": 1920715,
-      "ema50": 274.709824078465,
-      "ema200": 246.66137714942107,
-      "rsi": 60.66919860762598,
-      "return_1m": 10.185528756957329,
-      "return_3m": 24.726982526881702,
-      "return_6m": 53.48632862976173,
-      "avg_volume_30": 1107469.2333333334,
-      "volume_expansion": 1.734328089836777,
-      "momentum": 30.849731961360668,
-      "momentum_zscore": 0.0,
+      "date": "2026-09-17",
+      "high": 316.0,
+      "low": 292.5,
+      "close": 310.7,
+      "volume": 6087355,
+      "ema50": 276.12120352636833,
+      "ema200": 247.29857737679,
+      "rsi": 67.55859709754495,
+      "return_1m": 13.064046579330425,
+      "return_3m": 27.807486631016044,
+      "return_6m": 61.14309423785074,
+      "avg_volume_30": 1136868.6,
+      "volume_expansion": 5.354493034639183,
+      "momentum": 35.412293000311195,
+      "momentum_zscore": 1.12920427764243,
       "momentum_score": 100.0,
       "momentum_percentile": 100.0,
       "rank": 1
+    },
+    {
+      "symbol": "NIACL",
+      "date": "2026-09-17",
+      "high": 201.24,
+      "low": 186.5,
+      "close": 197.05,
+      "volume": 34650793,
+      "ema50": 186.5576158224625,
+      "ema200": 172.87722696299818,
+      "rsi": 52.630095263499285,
+      "return_1m": 7.045849630595402,
+      "return_3m": 19.092227728756207,
+      "return_6m": 42.90376386975127,
+      "avg_volume_30": 9322576.433333334,
+      "volume_expansion": 3.71686874844001,
+      "momentum": 24.298343792646452,
+      "momentum_zscore": 0.17273989478023888,
+      "momentum_score": 60.6579193945734,
+      "momentum_percentile": 66.66666666666666,
+      "rank": 2
+    },
+    {
+      "symbol": "KIMS",
+      "date": "2026-09-17",
+      "high": 799.05,
+      "low": 763.05,
+      "close": 791.85,
+      "volume": 1082406,
+      "ema50": 778.958968947085,
+      "ema200": 740.7160519503766,
+      "rsi": 57.973091089630806,
+      "return_1m": -1.6945996275605224,
+      "return_3m": -0.5713209442491207,
+      "return_6m": 19.18272125225769,
+      "avg_volume_30": 540601.9666666667,
+      "volume_expansion": 2.0022235706504707,
+      "momentum": 7.162772292116236,
+      "momentum_zscore": -1.3019441724226697,
+      "momentum_score": 0.0,
+      "momentum_percentile": 33.33333333333333,
+      "rank": 3
     }
   ]
 }
