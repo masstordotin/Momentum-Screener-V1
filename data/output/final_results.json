@@ -1,59 +1,80 @@
 {
-  "row_count": 1,
+  "row_count": 2,
   "generated_by": "momentum_screening_pipeline",
   "diagnostics": [
     {
       "step": "Input",
-      "rows": 161177,
+      "rows": 161676,
       "symbols": 502
     },
     {
       "step": "Trend Filter",
-      "rows": 39701,
-      "symbols": 123
+      "rows": 40257,
+      "symbols": 124
     },
     {
       "step": "RSI Filter",
-      "rows": 13967,
-      "symbols": 43
+      "rows": 14972,
+      "symbols": 46
     },
     {
       "step": "Volume Filter",
-      "rows": 1969,
-      "symbols": 6
+      "rows": 1645,
+      "symbols": 5
     },
     {
       "step": "HH-HL Filter",
-      "rows": 328,
-      "symbols": 1
+      "rows": 658,
+      "symbols": 2
     },
     {
       "step": "Momentum Ranking",
-      "rows": 1,
-      "symbols": 1
+      "rows": 2,
+      "symbols": 2
     }
   ],
   "results": [
     {
-      "symbol": "RBLBANK",
-      "date": "2026-09-24",
-      "high": 423.2,
-      "low": 409.1,
-      "close": 412.75,
-      "volume": 7315903,
-      "ema50": 392.1548341261149,
-      "ema200": 346.5373966765261,
-      "rsi": 55.629603801939616,
-      "return_1m": 7.486979166666674,
-      "return_3m": 9.46824028643416,
-      "return_6m": 41.30434782608694,
-      "avg_volume_30": 3252057.7333333334,
-      "volume_expansion": 2.249622731174965,
-      "momentum": 20.85960704969836,
-      "momentum_zscore": 0.0,
+      "symbol": "ENGINERSIN",
+      "date": "2026-09-25",
+      "high": 318.9,
+      "low": 295.05,
+      "close": 315.65,
+      "volume": 19615591,
+      "ema50": 261.42359234682374,
+      "ema200": 234.70778585250287,
+      "rsi": 72.95248798282559,
+      "return_1m": 26.07844703626776,
+      "return_3m": 25.347470415376065,
+      "return_6m": 64.7098726779378,
+      "avg_volume_30": 6159328.066666666,
+      "volume_expansion": 3.1846965752898524,
+      "momentum": 38.703879603041486,
+      "momentum_zscore": 1.0,
       "momentum_score": 100.0,
       "momentum_percentile": 100.0,
       "rank": 1
+    },
+    {
+      "symbol": "CASTROLIND",
+      "date": "2026-09-25",
+      "high": 202.1,
+      "low": 194.23,
+      "close": 201.67,
+      "volume": 13237379,
+      "ema50": 189.0076919345688,
+      "ema200": 188.99238378443437,
+      "rsi": 70.84872244023315,
+      "return_1m": 7.989290495314583,
+      "return_3m": 8.793224362086626,
+      "return_6m": 7.649193978861946,
+      "avg_volume_30": 2330653.333333333,
+      "volume_expansion": 5.67968595358097,
+      "momentum": 7.295502999233682,
+      "momentum_zscore": -1.0,
+      "momentum_score": 0.0,
+      "momentum_percentile": 50.0,
+      "rank": 2
     }
   ]
 }
