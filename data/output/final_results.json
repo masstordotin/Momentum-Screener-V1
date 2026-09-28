@@ -4,27 +4,27 @@
   "diagnostics": [
     {
       "step": "Input",
-      "rows": 161676,
+      "rows": 162175,
       "symbols": 502
     },
     {
       "step": "Trend Filter",
-      "rows": 40257,
-      "symbols": 124
+      "rows": 28191,
+      "symbols": 87
     },
     {
       "step": "RSI Filter",
-      "rows": 14972,
-      "symbols": 46
+      "rows": 6176,
+      "symbols": 19
     },
     {
       "step": "Volume Filter",
-      "rows": 1645,
-      "symbols": 5
+      "rows": 2640,
+      "symbols": 8
     },
     {
       "step": "HH-HL Filter",
-      "rows": 658,
+      "rows": 660,
       "symbols": 2
     },
     {
@@ -35,42 +35,42 @@
   ],
   "results": [
     {
-      "symbol": "ENGINERSIN",
-      "date": "2026-09-25",
-      "high": 318.9,
-      "low": 295.05,
-      "close": 315.65,
-      "volume": 19615591,
-      "ema50": 261.42359234682374,
-      "ema200": 234.70778585250287,
-      "rsi": 72.95248798282559,
-      "return_1m": 26.07844703626776,
-      "return_3m": 25.347470415376065,
-      "return_6m": 64.7098726779378,
-      "avg_volume_30": 6159328.066666666,
-      "volume_expansion": 3.1846965752898524,
-      "momentum": 38.703879603041486,
+      "symbol": "CASTROLIND",
+      "date": "2026-09-28",
+      "high": 203.4,
+      "low": 199.32,
+      "close": 201.04,
+      "volume": 4886805,
+      "ema50": 189.479547152821,
+      "ema200": 189.11226056269868,
+      "rsi": 69.17026374886265,
+      "return_1m": 8.511901549090517,
+      "return_3m": 8.611561318206373,
+      "return_6m": 13.396130633425464,
+      "avg_volume_30": 2726518.533333333,
+      "volume_expansion": 1.7923241453362089,
+      "momentum": 9.644300958650202,
       "momentum_zscore": 1.0,
       "momentum_score": 100.0,
       "momentum_percentile": 100.0,
       "rank": 1
     },
     {
-      "symbol": "CASTROLIND",
-      "date": "2026-09-25",
-      "high": 202.1,
-      "low": 194.23,
-      "close": 201.67,
-      "volume": 13237379,
-      "ema50": 189.0076919345688,
-      "ema200": 188.99238378443437,
-      "rsi": 70.84872244023315,
-      "return_1m": 7.989290495314583,
-      "return_3m": 8.793224362086626,
-      "return_6m": 7.649193978861946,
-      "avg_volume_30": 2330653.333333333,
-      "volume_expansion": 5.67968595358097,
-      "momentum": 7.295502999233682,
+      "symbol": "GESHIP",
+      "date": "2026-09-28",
+      "high": 1567.9,
+      "low": 1490.1,
+      "close": 1533.4,
+      "volume": 3277779,
+      "ema50": 1400.4672980447308,
+      "ema200": 1336.7708715001702,
+      "rsi": 72.90697946348489,
+      "return_1m": 16.413604615851817,
+      "return_3m": 0.6696428571428603,
+      "return_6m": 12.750000000000018,
+      "avg_volume_30": 886129.6666666666,
+      "volume_expansion": 3.698983482101378,
+      "momentum": 8.583613780313229,
       "momentum_zscore": -1.0,
       "momentum_score": 0.0,
       "momentum_percentile": 50.0,
