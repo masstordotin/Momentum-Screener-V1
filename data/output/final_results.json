@@ -1,80 +1,122 @@
 {
-  "row_count": 2,
+  "row_count": 4,
   "generated_by": "momentum_screening_pipeline",
   "diagnostics": [
     {
       "step": "Input",
-      "rows": 162175,
+      "rows": 162674,
       "symbols": 502
     },
     {
       "step": "Trend Filter",
-      "rows": 28191,
-      "symbols": 87
+      "rows": 25412,
+      "symbols": 78
     },
     {
       "step": "RSI Filter",
-      "rows": 6176,
-      "symbols": 19
+      "rows": 9131,
+      "symbols": 28
     },
     {
       "step": "Volume Filter",
-      "rows": 2640,
-      "symbols": 8
+      "rows": 3973,
+      "symbols": 12
     },
     {
       "step": "HH-HL Filter",
-      "rows": 660,
-      "symbols": 2
+      "rows": 1325,
+      "symbols": 4
     },
     {
       "step": "Momentum Ranking",
-      "rows": 2,
-      "symbols": 2
+      "rows": 4,
+      "symbols": 4
     }
   ],
   "results": [
     {
-      "symbol": "CASTROLIND",
-      "date": "2026-09-28",
-      "high": 203.4,
-      "low": 199.32,
-      "close": 201.04,
-      "volume": 4886805,
-      "ema50": 189.479547152821,
-      "ema200": 189.11226056269868,
-      "rsi": 69.17026374886265,
-      "return_1m": 8.511901549090517,
-      "return_3m": 8.611561318206373,
-      "return_6m": 13.396130633425464,
-      "avg_volume_30": 2726518.533333333,
-      "volume_expansion": 1.7923241453362089,
-      "momentum": 9.644300958650202,
-      "momentum_zscore": 1.0,
+      "symbol": "ADANIPORTS",
+      "date": "2026-09-29",
+      "high": 1822.0,
+      "low": 1738.4,
+      "close": 1822.0,
+      "volume": 4214197,
+      "ema50": 1741.5568365350473,
+      "ema200": 1652.0560914839186,
+      "rsi": 59.47733175893933,
+      "return_1m": 6.705710102489015,
+      "return_3m": -1.417595498322699,
+      "return_6m": 32.42241441965259,
+      "avg_volume_30": 2166210.2333333334,
+      "volume_expansion": 1.94542382597614,
+      "momentum": 13.884829138862028,
+      "momentum_zscore": 0.9618243268542033,
       "momentum_score": 100.0,
       "momentum_percentile": 100.0,
       "rank": 1
     },
     {
-      "symbol": "GESHIP",
-      "date": "2026-09-28",
-      "high": 1567.9,
-      "low": 1490.1,
-      "close": 1533.4,
-      "volume": 3277779,
-      "ema50": 1400.4672980447308,
-      "ema200": 1336.7708715001702,
-      "rsi": 72.90697946348489,
-      "return_1m": 16.413604615851817,
-      "return_3m": 0.6696428571428603,
-      "return_6m": 12.750000000000018,
-      "avg_volume_30": 886129.6666666666,
-      "volume_expansion": 3.698983482101378,
-      "momentum": 8.583613780313229,
-      "momentum_zscore": -1.0,
-      "momentum_score": 0.0,
-      "momentum_percentile": 50.0,
+      "symbol": "EMCURE",
+      "date": "2026-09-29",
+      "high": 1987.1,
+      "low": 1912.0,
+      "close": 1959.1,
+      "volume": 330808,
+      "ema50": 1908.0280613305124,
+      "ema200": 1718.2779290533144,
+      "rsi": 53.721637534869565,
+      "return_1m": 4.798331015299007,
+      "return_3m": 6.704793028322431,
+      "return_6m": 27.239072546599985,
+      "avg_volume_30": 178547.23333333334,
+      "volume_expansion": 1.852775838774315,
+      "momentum": 13.866733130196526,
+      "momentum_zscore": 0.9546230719009728,
+      "momentum_score": 99.69020532876723,
+      "momentum_percentile": 75.0,
       "rank": 2
+    },
+    {
+      "symbol": "CASTROLIND",
+      "date": "2026-09-29",
+      "high": 202.8,
+      "low": 198.1,
+      "close": 199.83,
+      "volume": 5827158,
+      "ema50": 189.8854472644751,
+      "ema200": 189.21890473620417,
+      "rsi": 65.93915542315803,
+      "return_1m": 7.876268624487159,
+      "return_3m": 8.350051510058009,
+      "return_6m": 14.990217516400062,
+      "avg_volume_30": 2842413.6,
+      "volume_expansion": 2.050073923091277,
+      "momentum": 10.07635618447486,
+      "momentum_zscore": -0.5537466056083175,
+      "momentum_score": 34.800836548420314,
+      "momentum_percentile": 50.0,
+      "rank": 3
+    },
+    {
+      "symbol": "GESHIP",
+      "date": "2026-09-29",
+      "high": 1582.0,
+      "low": 1526.1,
+      "close": 1537.8,
+      "volume": 2264928,
+      "ema50": 1405.8528941998393,
+      "ema200": 1338.7711613359893,
+      "rsi": 73.35979977572788,
+      "return_1m": 14.795461331740832,
+      "return_3m": 3.688220618973781,
+      "return_6m": 9.944948881103866,
+      "avg_volume_30": 978142.1333333332,
+      "volume_expansion": 2.3155407816669045,
+      "momentum": 8.043538004481848,
+      "momentum_zscore": -1.362700793146858,
+      "momentum_score": 0.0,
+      "momentum_percentile": 25.0,
+      "rank": 4
     }
   ]
 }
