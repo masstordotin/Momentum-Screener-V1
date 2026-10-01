@@ -1,23 +1,23 @@
 [
   {
     "rank": 1,
-    "name": "SYRMA",
-    "symbol": "SYRMA",
+    "name": "SCHNEIDER",
+    "symbol": "SCHNEIDER",
     "sector": "Unclassified",
     "bucket": "Momentum Leader",
     "score": 100.0,
-    "price": 1782.9,
-    "rsi": 66.62,
-    "ema50": 1532.02,
-    "ema200": 1190.02,
-    "volRatio": 1.73,
-    "ret1m": 24.07,
-    "ret3m": 25.42,
-    "ret6m": 118.03,
+    "price": 1275.4,
+    "rsi": 57.61,
+    "ema50": 1234.15,
+    "ema200": 1073.52,
+    "volRatio": 5.18,
+    "ret1m": 7.33,
+    "ret3m": -13.92,
+    "ret6m": 79.6,
     "setup": "Close > EMA50 > EMA200 with positive momentum persistence",
-    "buyZone": "1765.07-1800.73",
-    "invalid": "Daily close below EMA50 (1532.02)",
-    "thesis": "SYRMA passed trend, RSI, volume expansion, HH-HL structure, and positive momentum ranking filters.",
-    "indicator": "RSI 66.62, volume expansion 1.73x, momentum percentile 100.00"
+    "buyZone": "1262.65-1288.15",
+    "invalid": "Daily close below EMA50 (1234.15)",
+    "thesis": "SCHNEIDER passed trend, RSI, volume expansion, HH-HL structure, and positive momentum ranking filters.",
+    "indicator": "RSI 57.61, volume expansion 5.18x, momentum percentile 100.00"
   }
 ]

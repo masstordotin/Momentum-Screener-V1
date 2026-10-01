@@ -4,27 +4,27 @@
   "diagnostics": [
     {
       "step": "Input",
-      "rows": 163168,
+      "rows": 163662,
       "symbols": 524
     },
     {
       "step": "Trend Filter",
-      "rows": 25891,
-      "symbols": 79
+      "rows": 20366,
+      "symbols": 63
     },
     {
       "step": "RSI Filter",
-      "rows": 6152,
-      "symbols": 19
+      "rows": 6234,
+      "symbols": 20
     },
     {
       "step": "Volume Filter",
-      "rows": 2324,
-      "symbols": 7
+      "rows": 1194,
+      "symbols": 4
     },
     {
       "step": "HH-HL Filter",
-      "rows": 332,
+      "rows": 221,
       "symbols": 1
     },
     {
@@ -35,21 +35,21 @@
   ],
   "results": [
     {
-      "symbol": "SYRMA",
-      "date": "2026-09-30",
-      "high": 1820.0,
-      "low": 1686.0,
-      "close": 1782.9,
-      "volume": 3788979,
-      "ema50": 1532.0206729449983,
-      "ema200": 1190.0239462551035,
-      "rsi": 66.62322879142084,
-      "return_1m": 24.07098121085596,
-      "return_3m": 25.415025323579087,
-      "return_6m": 118.0250687863039,
-      "avg_volume_30": 2188231.1333333333,
-      "volume_expansion": 1.731525953672109,
-      "momentum": 59.64873135376648,
+      "symbol": "SCHNEIDER",
+      "date": "2026-10-01",
+      "high": 1294.3,
+      "low": 1195.5,
+      "close": 1275.4,
+      "volume": 1444982,
+      "ema50": 1234.1549472338822,
+      "ema200": 1073.5246801800388,
+      "rsi": 57.61213518224464,
+      "return_1m": 7.329798872338644,
+      "return_3m": -13.917386609071258,
+      "return_6m": 79.59586002957124,
+      "avg_volume_30": 279000.5,
+      "volume_expansion": 5.179137671796287,
+      "momentum": 29.129087803574848,
       "momentum_zscore": 0.0,
       "momentum_score": 100.0,
       "momentum_percentile": 100.0,
