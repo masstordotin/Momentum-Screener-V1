@@ -1,59 +1,37 @@
 {
-  "row_count": 1,
+  "row_count": 0,
   "generated_by": "momentum_screening_pipeline",
   "diagnostics": [
     {
       "step": "Input",
-      "rows": 165144,
+      "rows": 165638,
       "symbols": 524
     },
     {
       "step": "Trend Filter",
-      "rows": 32295,
-      "symbols": 99
+      "rows": 21096,
+      "symbols": 65
     },
     {
       "step": "RSI Filter",
-      "rows": 22918,
-      "symbols": 70
+      "rows": 7383,
+      "symbols": 23
     },
     {
       "step": "Volume Filter",
-      "rows": 4584,
-      "symbols": 14
+      "rows": 1342,
+      "symbols": 4
     },
     {
       "step": "HH-HL Filter",
-      "rows": 336,
-      "symbols": 1
+      "rows": 0,
+      "symbols": 0
     },
     {
       "step": "Momentum Ranking",
-      "rows": 1,
-      "symbols": 1
+      "rows": 0,
+      "symbols": 0
     }
   ],
-  "results": [
-    {
-      "symbol": "PETRONET",
-      "date": "2026-10-07",
-      "high": 299.6,
-      "low": 294.25,
-      "close": 297.0,
-      "volume": 3121238,
-      "ema50": 286.14996795610244,
-      "ema200": 282.99576124278053,
-      "rsi": 60.53905703392312,
-      "return_1m": 3.0892051371051554,
-      "return_3m": 9.351988217967588,
-      "return_6m": 16.61235227138875,
-      "avg_volume_30": 1827376.6,
-      "volume_expansion": 1.708043103977582,
-      "momentum": 10.06837840136681,
-      "momentum_zscore": 0.0,
-      "momentum_score": 100.0,
-      "momentum_percentile": 100.0,
-      "rank": 1
-    }
-  ]
+  "results": []
 }
