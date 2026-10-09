@@ -1,1 +1,44 @@
-[]
+[
+  {
+    "rank": 1,
+    "name": "CPPLUS",
+    "symbol": "CPPLUS",
+    "sector": "Unclassified",
+    "bucket": "Momentum Leader",
+    "score": 100.0,
+    "price": 4185.2,
+    "rsi": 66.2,
+    "ema50": 3674.6,
+    "ema200": 2856.67,
+    "volRatio": 3.28,
+    "ret1m": 9.31,
+    "ret3m": 14.27,
+    "ret6m": 128.5,
+    "setup": "Close > EMA50 > EMA200 with positive momentum persistence",
+    "buyZone": "4143.35-4227.05",
+    "invalid": "Daily close below EMA50 (3674.60)",
+    "thesis": "CPPLUS passed trend, RSI, volume expansion, HH-HL structure, and positive momentum ranking filters.",
+    "indicator": "RSI 66.20, volume expansion 3.28x, momentum percentile 100.00"
+  },
+  {
+    "rank": 2,
+    "name": "CYIENT",
+    "symbol": "CYIENT",
+    "sector": "Unclassified",
+    "bucket": "Momentum Leader",
+    "score": 0.0,
+    "price": 1158.8,
+    "rsi": 63.47,
+    "ema50": 1030.62,
+    "ema200": 999.78,
+    "volRatio": 3.72,
+    "ret1m": 6.67,
+    "ret3m": 37.76,
+    "ret6m": 39.22,
+    "setup": "Close > EMA50 > EMA200 with positive momentum persistence",
+    "buyZone": "1147.21-1170.39",
+    "invalid": "Daily close below EMA50 (1030.62)",
+    "thesis": "CYIENT passed trend, RSI, volume expansion, HH-HL structure, and positive momentum ranking filters.",
+    "indicator": "RSI 63.47, volume expansion 3.72x, momentum percentile 50.00"
+  }
+]
