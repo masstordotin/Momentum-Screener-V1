@@ -1,37 +1,80 @@
 {
-  "row_count": 0,
+  "row_count": 2,
   "generated_by": "momentum_screening_pipeline",
   "diagnostics": [
     {
       "step": "Input",
-      "rows": 166626,
+      "rows": 167120,
       "symbols": 524
     },
     {
       "step": "Trend Filter",
-      "rows": 25927,
-      "symbols": 79
+      "rows": 28415,
+      "symbols": 86
     },
     {
       "step": "RSI Filter",
-      "rows": 10165,
-      "symbols": 30
+      "rows": 20350,
+      "symbols": 61
     },
     {
       "step": "Volume Filter",
-      "rows": 2366,
-      "symbols": 7
+      "rows": 3392,
+      "symbols": 10
     },
     {
       "step": "HH-HL Filter",
-      "rows": 0,
-      "symbols": 0
+      "rows": 680,
+      "symbols": 2
     },
     {
       "step": "Momentum Ranking",
-      "rows": 0,
-      "symbols": 0
+      "rows": 2,
+      "symbols": 2
     }
   ],
-  "results": []
+  "results": [
+    {
+      "symbol": "BHEL",
+      "date": "2026-10-13",
+      "high": 442.35,
+      "low": 426.15,
+      "close": 442.35,
+      "volume": 15969804,
+      "ema50": 422.5415514710091,
+      "ema200": 367.2662538742904,
+      "rsi": 57.30213609471805,
+      "return_1m": 2.991850989522704,
+      "return_3m": 9.519683089873745,
+      "return_6m": 59.577922077922096,
+      "avg_volume_30": 7943555.2,
+      "volume_expansion": 2.010410149853305,
+      "momentum": 27.2854439560355,
+      "momentum_zscore": 1.0,
+      "momentum_score": 100.0,
+      "momentum_percentile": 100.0,
+      "rank": 1
+    },
+    {
+      "symbol": "NYKAA",
+      "date": "2026-10-13",
+      "high": 338.9,
+      "low": 331.5,
+      "close": 338.0,
+      "volume": 7063642,
+      "ema50": 330.5579502341236,
+      "ema200": 295.01332937774214,
+      "rsi": 52.52398200701335,
+      "return_1m": -1.155139640298286,
+      "return_3m": 4.176298351055641,
+      "return_6m": 32.58541560428352,
+      "avg_volume_30": 4672303.766666667,
+      "volume_expansion": 1.5118113788734613,
+      "momentum": 14.056027818970442,
+      "momentum_zscore": -1.0,
+      "momentum_score": 0.0,
+      "momentum_percentile": 50.0,
+      "rank": 2
+    }
+  ]
 }

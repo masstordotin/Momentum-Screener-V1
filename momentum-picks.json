@@ -1,1 +1,44 @@
-[]
+[
+  {
+    "rank": 1,
+    "name": "BHEL",
+    "symbol": "BHEL",
+    "sector": "Unclassified",
+    "bucket": "Momentum Leader",
+    "score": 100.0,
+    "price": 442.35,
+    "rsi": 57.3,
+    "ema50": 422.54,
+    "ema200": 367.27,
+    "volRatio": 2.01,
+    "ret1m": 2.99,
+    "ret3m": 9.52,
+    "ret6m": 59.58,
+    "setup": "Close > EMA50 > EMA200 with positive momentum persistence",
+    "buyZone": "437.93-446.77",
+    "invalid": "Daily close below EMA50 (422.54)",
+    "thesis": "BHEL passed trend, RSI, volume expansion, HH-HL structure, and positive momentum ranking filters.",
+    "indicator": "RSI 57.30, volume expansion 2.01x, momentum percentile 100.00"
+  },
+  {
+    "rank": 2,
+    "name": "NYKAA",
+    "symbol": "NYKAA",
+    "sector": "Unclassified",
+    "bucket": "Momentum Leader",
+    "score": 0.0,
+    "price": 338.0,
+    "rsi": 52.52,
+    "ema50": 330.56,
+    "ema200": 295.01,
+    "volRatio": 1.51,
+    "ret1m": -1.16,
+    "ret3m": 4.18,
+    "ret6m": 32.59,
+    "setup": "Close > EMA50 > EMA200 with positive momentum persistence",
+    "buyZone": "334.62-341.38",
+    "invalid": "Daily close below EMA50 (330.56)",
+    "thesis": "NYKAA passed trend, RSI, volume expansion, HH-HL structure, and positive momentum ranking filters.",
+    "indicator": "RSI 52.52, volume expansion 1.51x, momentum percentile 50.00"
+  }
+]
