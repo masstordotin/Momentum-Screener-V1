@@ -1,80 +1,59 @@
 {
-  "row_count": 2,
+  "row_count": 1,
   "generated_by": "momentum_screening_pipeline",
   "diagnostics": [
     {
       "step": "Input",
-      "rows": 168108,
-      "symbols": 524
+      "rows": 169097,
+      "symbols": 525
     },
     {
       "step": "Trend Filter",
-      "rows": 24997,
-      "symbols": 75
+      "rows": 20092,
+      "symbols": 60
     },
     {
       "step": "RSI Filter",
-      "rows": 10138,
-      "symbols": 30
+      "rows": 7998,
+      "symbols": 24
     },
     {
       "step": "Volume Filter",
-      "rows": 2612,
+      "rows": 2739,
       "symbols": 8
     },
     {
       "step": "HH-HL Filter",
-      "rows": 684,
-      "symbols": 2
+      "rows": 1032,
+      "symbols": 3
     },
     {
       "step": "Momentum Ranking",
-      "rows": 2,
-      "symbols": 2
+      "rows": 1,
+      "symbols": 1
     }
   ],
   "results": [
     {
-      "symbol": "INDHOTEL",
-      "date": "2026-10-15",
-      "high": 752.55,
-      "low": 728.3,
-      "close": 741.45,
-      "volume": 5011978,
-      "ema50": 723.1330453961347,
-      "ema200": 708.7563087905512,
-      "rsi": 57.341449177046265,
-      "return_1m": 3.699300699300712,
-      "return_3m": 1.367147446852135,
-      "return_6m": 16.77297424994093,
-      "avg_volume_30": 2799826.066666667,
-      "volume_expansion": 1.7901033423719106,
-      "momentum": 7.859194073892155,
-      "momentum_zscore": 1.0,
+      "symbol": "KARURVYSYA",
+      "date": "2026-10-19",
+      "high": 376.25,
+      "low": 355.45,
+      "close": 370.05,
+      "volume": 13858311,
+      "ema50": 333.78929952651447,
+      "ema200": 306.1612705959569,
+      "rsi": 73.2312844718499,
+      "return_1m": 11.628959276018104,
+      "return_3m": 22.940199335548183,
+      "return_6m": 31.760726366387736,
+      "avg_volume_30": 2663112.3,
+      "volume_expansion": 5.203802708582736,
+      "momentum": 21.912142202423173,
+      "momentum_zscore": 0.0,
       "momentum_score": 100.0,
       "momentum_percentile": 100.0,
       "rank": 1
-    },
-    {
-      "symbol": "ICICIBANK",
-      "date": "2026-10-15",
-      "high": 1389.4,
-      "low": 1342.1,
-      "close": 1389.4,
-      "volume": 17551899,
-      "ema50": 1368.4825004682389,
-      "ema200": 1367.794520533634,
-      "rsi": 57.755639566355896,
-      "return_1m": 2.8880331753554422,
-      "return_3m": -2.030743195600049,
-      "return_6m": 2.834727259270231,
-      "avg_volume_30": 9596937.9,
-      "volume_expansion": 1.828906176416959,
-      "momentum": 1.1022745800991662,
-      "momentum_zscore": -1.0,
-      "momentum_score": 0.0,
-      "momentum_percentile": 50.0,
-      "rank": 2
     }
   ]
 }
