@@ -1,122 +1,80 @@
 {
-  "row_count": 4,
+  "row_count": 2,
   "generated_by": "momentum_screening_pipeline",
   "diagnostics": [
     {
       "step": "Input",
-      "rows": 170582,
+      "rows": 171077,
       "symbols": 526
     },
     {
       "step": "Trend Filter",
-      "rows": 10181,
-      "symbols": 30
+      "rows": 14619,
+      "symbols": 43
     },
     {
       "step": "RSI Filter",
-      "rows": 2760,
-      "symbols": 8
+      "rows": 6248,
+      "symbols": 18
     },
     {
       "step": "Volume Filter",
-      "rows": 2066,
-      "symbols": 6
+      "rows": 2767,
+      "symbols": 8
     },
     {
       "step": "HH-HL Filter",
-      "rows": 1388,
-      "symbols": 4
+      "rows": 696,
+      "symbols": 2
     },
     {
       "step": "Momentum Ranking",
-      "rows": 4,
-      "symbols": 4
+      "rows": 2,
+      "symbols": 2
     }
   ],
   "results": [
     {
-      "symbol": "CYIENT",
-      "date": "2026-10-23",
-      "high": 1268.0,
-      "low": 1200.1,
-      "close": 1233.0,
-      "volume": 19888724,
-      "ema50": 1076.2497299824,
-      "ema200": 1015.3798316377824,
-      "rsi": 66.70168584041815,
-      "return_1m": 14.27247451343836,
-      "return_3m": 48.43797026425089,
-      "return_6m": 28.65191986644409,
-      "avg_volume_30": 663417.8333333334,
-      "volume_expansion": 29.979182048919892,
-      "momentum": 28.846653928540576,
-      "momentum_zscore": 1.7120864683719772,
+      "symbol": "CRISIL",
+      "date": "2026-10-26",
+      "high": 4827.6,
+      "low": 4402.5,
+      "close": 4777.8,
+      "volume": 213194,
+      "ema50": 4536.65564197239,
+      "ema200": 4466.961089198711,
+      "rsi": 63.62221972122193,
+      "return_1m": 3.7344218159711673,
+      "return_3m": 9.905226352594788,
+      "return_6m": 9.940632334667953,
+      "avg_volume_30": 40205.53333333333,
+      "volume_expansion": 5.302603455909054,
+      "momentum": 7.694705202839851,
+      "momentum_zscore": 1.0,
       "momentum_score": 100.0,
       "momentum_percentile": 100.0,
       "rank": 1
     },
     {
-      "symbol": "INDHOTEL",
-      "date": "2026-10-23",
-      "high": 794.2,
-      "low": 764.65,
-      "close": 781.75,
-      "volume": 11615950,
-      "ema50": 731.6607922343092,
-      "ema200": 711.7390185684901,
-      "rsi": 65.32999732659094,
-      "return_1m": 6.179966044142615,
-      "return_3m": 7.969062910020042,
-      "return_6m": 17.35344892291526,
-      "avg_volume_30": 3986999.866666666,
-      "volume_expansion": 2.913456330188323,
-      "momentum": 10.568091651000639,
-      "momentum_zscore": -0.3568458321961086,
-      "momentum_score": 17.147816736160035,
-      "momentum_percentile": 75.0,
-      "rank": 2
-    },
-    {
-      "symbol": "PERSISTENT",
-      "date": "2026-10-23",
-      "high": 5914.5,
-      "low": 5674.5,
-      "close": 5727.5,
-      "volume": 1173561,
-      "ema50": 5541.207736715457,
-      "ema200": 5413.152865338193,
-      "rsi": 54.34655328257474,
-      "return_1m": 6.736861721953047,
-      "return_3m": 14.5064875347368,
-      "return_6m": 7.459802247696956,
-      "avg_volume_30": 605704.5,
-      "volume_expansion": 1.937514084838399,
-      "momentum": 8.683239503890432,
-      "momentum_zscore": -0.5701903737273181,
-      "momentum_score": 8.604250062455824,
-      "momentum_percentile": 50.0,
-      "rank": 3
-    },
-    {
-      "symbol": "CRISIL",
-      "date": "2026-10-23",
-      "high": 4789.7,
-      "low": 4521.1,
-      "close": 4751.1,
-      "volume": 66423,
-      "ema50": 4526.81301511412,
-      "ema200": 4463.837080044929,
-      "rsi": 62.378054183555534,
-      "return_1m": 4.19535944558973,
-      "return_3m": 7.989362669333566,
-      "return_6m": 8.872797268498388,
-      "avg_volume_30": 38882.6,
-      "volume_expansion": 1.7082962559088128,
-      "momentum": 6.784999597317372,
-      "momentum_zscore": -0.7850502624485506,
+      "symbol": "SAGILITY",
+      "date": "2026-10-26",
+      "high": 44.86,
+      "low": 42.71,
+      "close": 44.5,
+      "volume": 34271191,
+      "ema50": 44.15834548330997,
+      "ema200": 43.67368021422574,
+      "rsi": 50.56001889752954,
+      "return_1m": -3.239834746684067,
+      "return_3m": 10.094012864918357,
+      "return_6m": 6.996874248617457,
+      "avg_volume_30": 17172735.9,
+      "volume_expansion": 1.9956744923795169,
+      "momentum": 5.178986609585676,
+      "momentum_zscore": -1.0,
       "momentum_score": 0.0,
-      "momentum_percentile": 25.0,
-      "rank": 4
+      "momentum_percentile": 50.0,
+      "rank": 2
     }
   ]
 }
