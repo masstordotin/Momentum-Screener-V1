@@ -1,143 +1,59 @@
 {
-  "row_count": 5,
+  "row_count": 1,
   "generated_by": "momentum_screening_pipeline",
   "diagnostics": [
     {
       "step": "Input",
-      "rows": 172562,
+      "rows": 173057,
       "symbols": 526
     },
     {
       "step": "Trend Filter",
-      "rows": 24844,
-      "symbols": 73
+      "rows": 21649,
+      "symbols": 63
     },
     {
       "step": "RSI Filter",
-      "rows": 19158,
-      "symbols": 56
+      "rows": 15152,
+      "symbols": 44
     },
     {
       "step": "Volume Filter",
-      "rows": 5873,
-      "symbols": 17
+      "rows": 5261,
+      "symbols": 15
     },
     {
       "step": "HH-HL Filter",
-      "rows": 1755,
-      "symbols": 5
+      "rows": 352,
+      "symbols": 1
     },
     {
       "step": "Momentum Ranking",
-      "rows": 5,
-      "symbols": 5
+      "rows": 1,
+      "symbols": 1
     }
   ],
   "results": [
     {
       "symbol": "ACUTAAS",
-      "date": "2026-10-29",
-      "high": 4032.2,
-      "low": 3673.3,
-      "close": 3976.7,
-      "volume": 2936878,
-      "ema50": 3292.949361454183,
-      "ema200": 2845.5745947119144,
-      "rsi": 72.31859335045624,
-      "return_1m": 23.715156794425084,
-      "return_3m": 20.28007984997884,
-      "return_6m": 61.14352864899908,
-      "avg_volume_30": 587148.1,
-      "volume_expansion": 5.001937330632595,
-      "momentum": 35.2844667734783,
-      "momentum_zscore": 1.313196403250916,
+      "date": "2026-10-30",
+      "high": 4024.0,
+      "low": 3906.2,
+      "close": 4003.6,
+      "volume": 1147965,
+      "ema50": 3320.818013946176,
+      "ema200": 2857.097235560552,
+      "rsi": 72.82919143750729,
+      "return_1m": 21.17066674737447,
+      "return_3m": 23.804811676665217,
+      "return_6m": 59.99040920716112,
+      "avg_volume_30": 676236.2333333333,
+      "volume_expansion": 1.6975798447554349,
+      "momentum": 35.37174053533891,
+      "momentum_zscore": 0.0,
       "momentum_score": 100.0,
       "momentum_percentile": 100.0,
       "rank": 1
-    },
-    {
-      "symbol": "PVRINOX",
-      "date": "2026-10-29",
-      "high": 1515.0,
-      "low": 1440.3,
-      "close": 1490.3,
-      "volume": 1665883,
-      "ema50": 1297.020736780645,
-      "ema200": 1137.3714696807997,
-      "rsi": 69.02818096460524,
-      "return_1m": 21.657142857142865,
-      "return_3m": 30.728070175438592,
-      "return_6m": 46.26558052802041,
-      "avg_volume_30": 799125.2666666667,
-      "volume_expansion": 2.0846331226001364,
-      "momentum": 32.056081835268316,
-      "momentum_zscore": 1.084234346437467,
-      "momentum_score": 90.65765503336425,
-      "momentum_percentile": 80.0,
-      "rank": 2
-    },
-    {
-      "symbol": "PNB",
-      "date": "2026-10-29",
-      "high": 123.9,
-      "low": 119.62,
-      "close": 123.9,
-      "volume": 27694674,
-      "ema50": 116.6066476391622,
-      "ema200": 113.87748926553829,
-      "rsi": 63.87530404929748,
-      "return_1m": 10.035523978685635,
-      "return_3m": 11.541231544832552,
-      "return_6m": 8.798735511064294,
-      "avg_volume_30": 17647830.433333334,
-      "volume_expansion": 1.56929624321923,
-      "momentum": 8.988968463612611,
-      "momentum_zscore": -0.5517210378828704,
-      "momentum_score": 23.90572345546783,
-      "momentum_percentile": 60.0,
-      "rank": 3
-    },
-    {
-      "symbol": "UNIONBANK",
-      "date": "2026-10-29",
-      "high": 187.5,
-      "low": 182.55,
-      "close": 186.5,
-      "volume": 20550962,
-      "ema50": 177.71322023248615,
-      "ema200": 172.15900854670585,
-      "rsi": 62.4810853476387,
-      "return_1m": 8.588064046579325,
-      "return_3m": 9.013327098433477,
-      "return_6m": 5.905735377626353,
-      "avg_volume_30": 12489501.433333334,
-      "volume_expansion": 1.6454589568444555,
-      "momentum": 6.783905089896449,
-      "momentum_zscore": -0.7081075454131619,
-      "momentum_score": 17.524680579591873,
-      "momentum_percentile": 40.0,
-      "rank": 4
-    },
-    {
-      "symbol": "INDIANB",
-      "date": "2026-10-29",
-      "high": 866.6,
-      "low": 835.25,
-      "close": 864.1,
-      "volume": 2333597,
-      "ema50": 843.2803805340242,
-      "ema200": 837.8423063579103,
-      "rsi": 58.164438603431456,
-      "return_1m": 7.682721664901226,
-      "return_3m": 4.397728645644561,
-      "return_6m": -5.319673478332321,
-      "avg_volume_30": 1189562.1666666667,
-      "volume_expansion": 1.9617276552591547,
-      "momentum": 0.7279935353406848,
-      "momentum_zscore": -1.137602166392351,
-      "momentum_score": 0.0,
-      "momentum_percentile": 20.0,
-      "rank": 5
     }
   ]
 }
