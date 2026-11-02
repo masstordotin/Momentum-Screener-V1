@@ -1,59 +1,80 @@
 {
-  "row_count": 1,
+  "row_count": 2,
   "generated_by": "momentum_screening_pipeline",
   "diagnostics": [
     {
       "step": "Input",
-      "rows": 173057,
+      "rows": 173552,
       "symbols": 526
     },
     {
       "step": "Trend Filter",
-      "rows": 21649,
-      "symbols": 63
+      "rows": 26907,
+      "symbols": 79
     },
     {
       "step": "RSI Filter",
-      "rows": 15152,
-      "symbols": 44
+      "rows": 20193,
+      "symbols": 58
     },
     {
       "step": "Volume Filter",
-      "rows": 5261,
-      "symbols": 15
+      "rows": 4920,
+      "symbols": 14
     },
     {
       "step": "HH-HL Filter",
-      "rows": 352,
-      "symbols": 1
+      "rows": 706,
+      "symbols": 2
     },
     {
       "step": "Momentum Ranking",
-      "rows": 1,
-      "symbols": 1
+      "rows": 2,
+      "symbols": 2
     }
   ],
   "results": [
     {
-      "symbol": "ACUTAAS",
-      "date": "2026-10-30",
-      "high": 4024.0,
-      "low": 3906.2,
-      "close": 4003.6,
-      "volume": 1147965,
-      "ema50": 3320.818013946176,
-      "ema200": 2857.097235560552,
-      "rsi": 72.82919143750729,
-      "return_1m": 21.17066674737447,
-      "return_3m": 23.804811676665217,
-      "return_6m": 59.99040920716112,
-      "avg_volume_30": 676236.2333333333,
-      "volume_expansion": 1.6975798447554349,
-      "momentum": 35.37174053533891,
-      "momentum_zscore": 0.0,
+      "symbol": "SHYAMMETL",
+      "date": "2026-11-02",
+      "high": 1222.4,
+      "low": 1184.7,
+      "close": 1191.0,
+      "volume": 1197327,
+      "ema50": 1097.5589538555512,
+      "ema200": 988.0911612434718,
+      "rsi": 62.25280705768613,
+      "return_1m": 11.830985915492963,
+      "return_3m": 15.485309803161073,
+      "return_6m": 34.77424465316283,
+      "avg_volume_30": 544403.0,
+      "volume_expansion": 2.1993394599221534,
+      "momentum": 20.921487985312048,
+      "momentum_zscore": 1.0,
       "momentum_score": 100.0,
       "momentum_percentile": 100.0,
       "rank": 1
+    },
+    {
+      "symbol": "JSWSTEEL",
+      "date": "2026-11-02",
+      "high": 1310.9,
+      "low": 1246.0,
+      "close": 1309.9,
+      "volume": 3161991,
+      "ema50": 1249.9462327449528,
+      "ema200": 1231.4074528879323,
+      "rsi": 62.139834934583966,
+      "return_1m": 4.507738950055851,
+      "return_3m": 3.141732283464571,
+      "return_6m": 2.359928108150356,
+      "avg_volume_30": 1802905.8666666667,
+      "volume_expansion": 1.753830334939284,
+      "momentum": 2.788038718310684,
+      "momentum_zscore": -1.0,
+      "momentum_score": 0.0,
+      "momentum_percentile": 50.0,
+      "rank": 2
     }
   ]
 }
