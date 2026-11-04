@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "rank": 1,
+    "name": "IPCALAB",
+    "symbol": "IPCALAB",
+    "sector": "Unclassified",
+    "bucket": "Momentum Leader",
+    "score": 100.0,
+    "price": 1972.0,
+    "rsi": 56.66,
+    "ema50": 1912.27,
+    "ema200": 1727.89,
+    "volRatio": 1.67,
+    "ret1m": 1.06,
+    "ret3m": 16.36,
+    "ret6m": 28.89,
+    "setup": "Close > EMA50 > EMA200 with positive momentum persistence",
+    "buyZone": "1952.28-1991.72",
+    "invalid": "Daily close below EMA50 (1912.27)",
+    "thesis": "IPCALAB passed trend, RSI, volume expansion, HH-HL structure, and positive momentum ranking filters.",
+    "indicator": "RSI 56.66, volume expansion 1.67x, momentum percentile 100.00"
+  }
+]

@@ -1,37 +1,59 @@
 {
-  "row_count": 0,
+  "row_count": 1,
   "generated_by": "momentum_screening_pipeline",
   "diagnostics": [
     {
       "step": "Input",
-      "rows": 174047,
+      "rows": 174542,
       "symbols": 526
     },
     {
       "step": "Trend Filter",
-      "rows": 29895,
-      "symbols": 87
+      "rows": 34946,
+      "symbols": 101
     },
     {
       "step": "RSI Filter",
-      "rows": 19486,
-      "symbols": 56
+      "rows": 23438,
+      "symbols": 68
     },
     {
       "step": "Volume Filter",
-      "rows": 7299,
+      "rows": 7396,
       "symbols": 21
     },
     {
       "step": "HH-HL Filter",
-      "rows": 0,
-      "symbols": 0
+      "rows": 355,
+      "symbols": 1
     },
     {
       "step": "Momentum Ranking",
-      "rows": 0,
-      "symbols": 0
+      "rows": 1,
+      "symbols": 1
     }
   ],
-  "results": []
+  "results": [
+    {
+      "symbol": "IPCALAB",
+      "date": "2026-11-04",
+      "high": 1995.0,
+      "low": 1955.0,
+      "close": 1972.0,
+      "volume": 402858,
+      "ema50": 1912.2698856288173,
+      "ema200": 1727.893180837329,
+      "rsi": 56.66242763221972,
+      "return_1m": 1.060831240711324,
+      "return_3m": 16.362778072815253,
+      "return_6m": 28.888888888888896,
+      "avg_volume_30": 240812.3333333333,
+      "volume_expansion": 1.6729126553595677,
+      "momentum": 16.676555225542398,
+      "momentum_zscore": 0.0,
+      "momentum_score": 100.0,
+      "momentum_percentile": 100.0,
+      "rank": 1
+    }
+  ]
 }
